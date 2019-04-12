@@ -31,23 +31,26 @@
           </picker>
         </view>
       </view>
+
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <textarea class="weui-textarea" placeholder="请详细描述您组队的结构，您对小组成员的要求等" style="height: 10.0em" />
+          <textarea bindinput="detailsInf" class="weui-input" placeholder="请详细描述您组队的结构，以及对队员的要求"   style="height: 10.0em" />
           <view class="weui-textarea-counter">0/200</view>
         </view>
       </view>
+
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
           <view class="weui-label">开始时间</view>
         </view>
         <view class="weui-cell__bd">
           <picker mode="date" value="{{date}}" start="2019-05-01" end="2020-09-01" bindchange="bindDateChange">
-            <view class="weui-input">{{date}}</view>
+            <view  class="weui-input">{{date}}</view>
           </picker>
         </view>
       </view>
     </view>
+
     <i-panel title="需要人数">
       <view style="padding: 16px">
         <i-input-number value="{{ value }}" size="large" min="1" max="100" bindchange="handleChange" />

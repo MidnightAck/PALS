@@ -6,6 +6,20 @@ Page({
     showTopTips: false,
     value: 1,
     brief: '',
+    details:'',
+    checkboxItems: [{
+      name: '禁止发布在广场中（仅发起者和被转发者可见）',
+      value: '0'
+    },
+    {
+      name: '指定标签可见',
+      value: '1'
+    },
+    {
+      name: '要求候选人填写说明',
+      value: '2'
+    }
+    ],
 
     radioItems: [{
         name: 'cell standard',
@@ -44,31 +58,42 @@ Page({
       brief: e.detail.value
     })
   },
-  bindCountryChange: function(e) {
+  detailsInf: function (e) {
     this.setData({
-      contryIndex: e.detail.value
+      details: e.detail.value
     })
-
+  },
+  dateInf: function (e) {
+    this.setData({
+      dateBegin: e.detail.value
+    })
+  },
+  bindCountryChange: function (e) {
+    console.log('picker country 发生选择改变，携带值为', e.detail.value);
+    this.setData({
+      countryIndex: e.detail.value
+    })
+    console.log(this.data.countryIndex,'dasas')
   },
   raise: function() {
     var that = this;
-    let index = that.data.countryIndex;
-    let dataIntro = {};
-    let key = 'contries[' + that.data.countryIndex + ']';
-     // key 可以是任何字符串
-    that.setData(dataIntro.countryIndex)
+
 
     wx.showToast({
       title: '正在发布中',
       icon: 'loading',
       duration: 10000
     });
-    db.collection('tasking').add({
+    db.collection('taskOngoing').add({
       data: {
         /*库新添项*/
         briefInf: that.data.brief, //简介
         raiserid: app.globalData.stuId, //发起者id
-        category:  key//类别,
+        category:  that.data.countryIndex,//类别,
+        detailsInf: that.data.details, //具体info
+        dateInf:that.data.date,
+        teammate:that.data.value,
+         checkboxItems: that.data.checkboxItems
       },
       success(res) {
         wx.hideToast();
