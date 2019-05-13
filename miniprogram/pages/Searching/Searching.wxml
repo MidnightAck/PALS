@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<import src="/wxSearch/wxSearch.wxml"/>
+
+<view class= page>
+<view class="wxSearch-section">
+  <view class="wxSearch-pancel">
+    <input bindinput="wxSearchInput" bindfocus="wxSerchFocus" value="{{wxSearchData.value}}" bindblur="wxSearchBlur" class="wxSearch-input" placeholder="组个队吧" />
+    <button class="wxSearch-button" bindtap="wxSearchFn" size="mini" plain="true">找队</button>
+  </view>
+
+
+  <i-card bindtap="detailedInf" wx:for="{{taskOngoing}}" wx:for-index="index" data-index="{{index}}"wx:key="number" title="{{category[item.category]}}" extra="{{item.dateInf}}"thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+  <view slot="content">{{item.briefInf}}</view>
+  <view slot="footer">{{item.teammate}}人</view>
+</i-card>
+</view>
+<template is="wxSearch" data="{{wxSearchData}}"/>
+
+
+</view>

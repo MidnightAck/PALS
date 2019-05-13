@@ -1,0 +1,53 @@
+<!--个人中心-->
+<!--<i-cell-group>
+    <i-cell title="注册" is-link url="/pages/login/login"></i-cell>
+    <i-cell title="我的资料" is-link></i-cell>
+    <i-cell title="我的认证" is-link></i-cell>
+    <i-cell title="我的收藏" is-link></i-cell>
+    <i-cell title="组队历史" is-link></i-cell>
+    <i-cell title="更多" is-link></i-cell>
+    <view style="padding: 15px;">PANEL 内容区域</view>
+
+</i-cell-group>-->
+<view class="weui-cells weui-cells_after-title">
+  <navigator url="/pages/login/login" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view class="weui-cell__bd">注册</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </navigator>
+  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view class="weui-cell__bd">我的资料</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </navigator>
+  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view class="weui-cell__bd">我的认证</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </navigator>
+</view>
+<view class="weui-cells__title">
+  <text>\n</text>
+</view>
+<view class="weui-cells weui-cells_after-title">
+
+  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view class="weui-cell__bd">我的收藏</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </navigator>
+  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view class="weui-cell__bd">组队历史</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </navigator>
+  <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view class="weui-cell__bd">更多</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+  </navigator>
+</view>
+<text>\n\n\n\n\n\n</text>
+<button type="warn">退出登录</button>
+
+
+<view class="weui-footer">
+  <view class="weui-footer__links">
+    <navigator url="" class="weui-footer__link">同济大学</navigator>
+  </view>
+  <view class="weui-footer__text">Copyright © 2019-2019 lyp</view>
+</view>

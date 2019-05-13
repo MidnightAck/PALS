@@ -1,0 +1,65 @@
+<!--发起-->
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-cells__title">队伍基本信息</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input bindinput="briefInf" class="weui-input" placeholder="请简单描述你队伍的性质 " />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">选择分类</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindCountryChange" value="{{countryIndex}}" range="{{countries}}">
+            <view class="weui-select weui-select_in-select-after">{{countries[countryIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea bindinput="detailsInf" class="weui-input" placeholder="请详细描述您组队的结构，以及对队员的要求" style="height: 10.0em" />
+          <view class="weui-textarea-counter">0/200</view>
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">开始时间</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{date}}" start="2019-05-01" end="2020-09-01" bindchange="bindDateChange">
+            <view class="weui-input">{{date}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <i-panel title="需要人数">
+      <view style="padding: 16px">
+        <i-input-number value="{{ value }}" size="large" min="1" max="100" bindchange="handleChange" />
+      </view>
+    </i-panel>
+
+
+    <view class="weui-cells__title">高级设置</view>
+    <view class="weui-cells weui-cells_after-title">
+      <checkbox-group bindchange="checkboxChange">
+        <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="value">
+          <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+
+          <view class="weui-cell__hd weui-check__hd_in-checkbox">
+            <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+            <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+          </view>
+          <view class="weui-cell__bd">{{item.name}}</view>
+        </label>
+      </checkbox-group>
+    </view>
+    <button type="primary" ontap="raise">发布</button>
+
+  </view>
+</view>

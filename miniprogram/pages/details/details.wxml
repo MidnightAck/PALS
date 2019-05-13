@@ -1,0 +1,39 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">队伍简述</view>
+        <view class="weui-cell__ft">{{taskOngoing.briefInf}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">详细信息</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__mid">{{taskOngoing.detailsInf}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">发起者学号</view>
+        <view class="weui-cell__ft">{{taskOngoing.Giverid}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">候选人学号</view>
+        <view class="weui-cell__ft">{{taskOngoing.Reciverid}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">队伍ID</view>
+        <view class="weui-cell__ft">{{taskOngoing.taskid}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">活动开始时间</view>
+        <view class="weui-cell__ft">{{taskOngoing.dateInf}}</view>
+      </view>
+
+    </view>
+  </view>
+
+  <view class="padding flex flex-direction">
+    
+
+    <button ontap="joinTeam" class="cu-btn bg-red margin-tb-sm lg" disabled="{{disabled}}">加入队伍</button>
+  </view>
+</view>
