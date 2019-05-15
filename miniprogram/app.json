@@ -2,7 +2,7 @@
   "cloud": true,
   "pages": [
     "pages/first/first",
-   
+    "pages/usercenter/usercenter",
     "pages/Square/Square",
     "pages/Test/Test",
     "pages/raise/raise",
@@ -11,7 +11,8 @@
     "pages/taskinf/taskinf",
     "pages/taskinf_change/taskinf_change",
     "pages/details/details",
-    "pages/Searching/Searching"
+    "pages/Searching/Searching",
+    "pages/candidate/candidate"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -43,8 +44,13 @@
         "text": "信息",
         "iconPath": "images/chat.png",
         "selectedIconPath": "images/chat_focus.png"
+      },
+      {
+        "pagePath": "pages/usercenter/usercenter",
+        "text": "我的",
+        "iconPath": "images/burger.png",
+        "selectedIconPath": "images/burger_focus.png"
       }
-    
     ]
   },
   "usingComponents": {

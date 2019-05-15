@@ -63,7 +63,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    stuId:'1651390',
+    stuId:'1754026',
     openid:'',
     ColorList: [{
       title: '嫣红',

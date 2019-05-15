@@ -1,0 +1,11 @@
+<i-card  wx:for="{{userlist.Array}}" wx:for-index="index" data-index="{{index}}"wx:key="index" title="{{item.school}}" extra="{{item.major}}"thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+  <view slot="content">{{item.Array.username}}</view>
+  <view slot="footer">{{item.userid}}人</view>
+</i-card>
+
+
+
+<!--pages/wxfor/wxfor.wxml-->
+ <view class="info_body" wx:for="{{userlist.Array}}" wx:for-index="index" wx:for-item="item">
+ <text>这是第{{index}}个，他的name是{{item.username}}</text>
+ </view>

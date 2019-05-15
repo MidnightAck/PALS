@@ -40,7 +40,6 @@ Page({
   },
   detailedInf: function(event) {
     var that = this
-    console.log(that.data.taskOngoing[event.currentTarget.dataset.index])
     wx.navigateTo({
       url: '../taskinf/taskinf?index=' + event.currentTarget.dataset.index + '&taskongoing=' + JSON.stringify(that.data.taskOngoing[event.currentTarget.dataset.index]),
       success: function(res) {},
@@ -49,9 +48,7 @@ Page({
     })
 
   },
-  onHide: function() {
-    console.log("usercenter page onhide")
-  },
+
   userinf: function() {
     wx.navigateTo({
       url: '../userinf/userinf',
