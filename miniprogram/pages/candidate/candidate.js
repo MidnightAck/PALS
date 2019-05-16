@@ -28,7 +28,8 @@ Page({
       taskOngoing: JSON.parse(option.taskongoing),
     })
   },
-
+///////////显示候选人信息/////////////////
+///////////有bug未解决//////////////////
   onShow:function(){
     var list =[]
     list= this.data.taskOngoing.Reciverid
