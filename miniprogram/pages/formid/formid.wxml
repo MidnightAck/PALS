@@ -1,0 +1,23 @@
+<form report-submit="true" bindsubmit="button_three">
+  <button formType="submit">存储formId</button>
+</form>
+<form report-submit="true" bindsubmit="button_one">
+  <button formType="submit">发给自己模版消息</button>
+</form>
+<form report-submit="true" bindsubmit="button_two">
+  <view class="section">
+    <input style='font-size:30rpx;text-align: center;line-height:100rpx;margin:30rpx;' name="input" placeholder="please input here" />
+  </view>
+  <button formType="submit">发给别人模版消息</button>
+</form>
+
+<view style='margin:100rpx;' hidden='{{receiveDataShow}}'>
+  <view>收到{{receiveData.sender_openid}}的消息:</view>
+  <view style='font-size:50rpx;text-align: center;line-height:100rpx;'>{{receiveData.value}}</view>
+  <form report-submit="true" bindsubmit="receive">
+    <view class="section">
+      <input style='font-size:30rpx;text-align: center;line-height:100rpx;margin:30rpx;' name="input" placeholder="please input here" />
+    </view>
+    <button formType="submit">回复消息</button>
+  </form>
+</view>
