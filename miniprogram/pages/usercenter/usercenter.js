@@ -1,28 +1,39 @@
+/*usercenter.js*/
 var app = getApp()
-//wx.cloud.init();
-
+const db = wx.cloud.database();
+const _ = db.command
 Page({
   data: {
     category: ['比赛', '项目', '拼车', '其他'],
     taskOngoing: [{
       Giverid: '',
-      Reciverid: '',
+      Reciverid: [{
+        userid: '',
+        major: '',
+        school: '',
+        username: ''
+      }],
       _id: '',
       briefInf: '',
       category: '',
-      taskid: ''
-    }]
+      taskid: '',
+      stuId: ''
+    }],
   },
-  onShow: function() {
+  /*------------------------
+  页面显示时加载最新数据库
+  索引：Giverid or Reciverid
+  ------------------------*/
+  onShow: function () {
     var that = this
-    const db = wx.cloud.database();
-    const _ = db.command
+    this.data.stuId=app.globalData.stuId
+   console.log(this.data.stuId)
     db.collection('taskOngoing').where(_.or([{
-        Giverid: app.globalData.stuId
-      },
-      {
-        Reciverid: app.globalData.stuId
-      }
+      Giverid: this.data.stuId
+    },
+    {
+      Reciverid: this.data.stuId
+    }
     ])).get({
       success: res => {
         console.log(res.data)
@@ -38,27 +49,36 @@ Page({
       }
     })
   },
-  detailedInf: function(event) {
+  /*------------------------
+  点击任务卡片后显示详情页面跳转和传参
+  ------------------------*/
+  detailedInf: function (event) {
     var that = this
+    console.log(that.data.taskOngoing[event.currentTarget.dataset.index])
     wx.navigateTo({
       url: '../taskinf/taskinf?index=' + event.currentTarget.dataset.index + '&taskongoing=' + JSON.stringify(that.data.taskOngoing[event.currentTarget.dataset.index]),
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
     })
 
   },
-
-  userinf: function() {
+  onHide: function () {
+    console.log("usercenter page onhide")
+  },
+  /*------------------------
+  点击个人中心
+  ------------------------*/
+  userinf: function () {
     wx.navigateTo({
       url: '../userinf/userinf',
-      success: function(res) {
+      success: function (res) {
         "login relaunch success"
       },
-      fail: function(res) {
+      fail: function (res) {
         "login relaunch fail"
       },
-      complete: function(res) {
+      complete: function (res) {
         "login relaunch complete"
       },
     })

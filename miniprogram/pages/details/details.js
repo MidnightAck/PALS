@@ -44,6 +44,7 @@ Page({
   joinTeam:function(){
     var newid = []
     newid = this.data.taskOngoing.Reciverid
+    console.log(newid)
     newid.push(this.data.stuID)
     var taskid = this.data.taskOngoing._id;
     wx.showModal({

@@ -53,26 +53,13 @@ Page({
     }
   },
 
-  /*
+  /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
 
   },
-  /*---------------------------
-  * 认证页面跳转
-  ----------------------------*/
-  login: function () {
-    wx.navigateTo({
-      url: '../rec/rec',
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
 
-
-
-  },
   /**
    * 生命周期函数--监听页面显示
    */

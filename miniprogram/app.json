@@ -13,7 +13,9 @@
     "pages/details/details",
     "pages/Searching/Searching",
     "pages/candidate/candidate",
-    "pages/formid/formid"
+    "pages/formid/formid",
+    "pages/rec/rec",
+    "pages/userfile/userfile"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -40,12 +42,7 @@
         "iconPath": "images/index.png",
         "selectedIconPath": "images/index_focus.png"
       },
-      {
-        "pagePath": "pages/formid/formid",
-        "text": "信息",
-        "iconPath": "images/chat.png",
-        "selectedIconPath": "images/chat_focus.png"
-      },
+     
       {
         "pagePath": "pages/usercenter/usercenter",
         "text": "我的",

@@ -1,40 +1,3 @@
-/**featured.wxss**/
-
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
-  background-color: #aaa;
-}
-
-.searchbar-result {
-  margin-top: 0;
-  font-size: 14px;
-}
-
-.searchbar-result:before {
-  display: none;
-}
-
-.weui-cell {
-  padding: 12px 15px 12px 35px;
-}
-
 .UCenter-bg {
   background-image: url(https://image.weilanwl.com/color2.0/index.jpg);
   background-size: cover;
@@ -60,24 +23,24 @@
   height: 200rpx;
 }
 
-.UCenter-bg .gif-wave {
+.UCenter-bg .gif-wave{
   position: absolute;
   width: 100%;
   bottom: 0;
   left: 0;
   z-index: 99;
-  mix-blend-mode: screen;
-  height: 100rpx;
+  mix-blend-mode: screen;  
+  height: 100rpx;   
 }
 
-map, .mapBox {
+map,.mapBox{
   left: 0;
   z-index: 99;
-  mix-blend-mode: screen;
-  height: 100rpx;
+  mix-blend-mode: screen;  
+  height: 100rpx;   
 }
 
-map, .mapBox {
+map,.mapBox{
   width: 750rpx;
   height: 300rpx;
 }

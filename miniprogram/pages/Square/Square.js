@@ -22,12 +22,15 @@ Page({
     pageSize: 20,
     sinput:''
   },
+  
   onLoad: function() {
     console.log('onLoad')
     var that = this
     //初始化的时候渲染wxSearchdata
     WxSearch.init(that, 43, ['拼车', '比赛', '游玩', '推剧本', '约电影']);
     WxSearch.initMindKeys(['拼车', '比赛', '游玩', '推剧本', '约电影']);
+
+    
   },
 
   ///////////////////////////搜索框相关///////////////////////////////////
@@ -90,8 +93,8 @@ Page({
   ///////////////////////////显示数据库内容/////////////
   onShow: function() {
     var that = this
-    console.log(app.globalData.stuId)
     console.log(app.globalData.openid)
+    console.log(app.globalData.stuId)
     const db = wx.cloud.database();
     db.collection('taskOngoing').count({
       success: function(res) {
@@ -107,11 +110,9 @@ Page({
           if (taskOngoing) {
             this.setData({
               taskOngoing: taskOngoing
-
             })
           }
         },
-
         fail(res) {
           console.log(fail)
         }

@@ -1,4 +1,6 @@
-<form report-submit="true" bindsubmit="makeCandi">
-  
-  <button formType="submit">选择候选人</button>
+<form report-submit="true" bindsubmit="selectU">
+<i-card bindtap="selectU" wx:for="{{userlist}}" wx:for-index="index" data-index="{{index}}"wx:key="number" title="{{item.username}}" extra="{{item.userid}}"thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+  <view slot="content">{{item._openid}}</view>
+</i-card>
 </form>
+

@@ -1,5 +1,6 @@
 //app.js
 
+
 App({
   
   onLaunch: function() {
@@ -46,24 +47,40 @@ App({
         }
       }
     })
-    this.getOpenid();
-    console.log(this.globalData.openid)
+    var that = this
+    that.getOpenid();
+    console.log(that.globalData.openid)
   },
+///////////////全局获得openid/////////////
 
   getOpenid() {
     let that = this;
     wx.cloud.callFunction({
       name: 'getOpenid', complete: res => {
-        //console.log('云函数获取到的openid: ', res.result.openId)
         var openid = res.result.openId;
         this.globalData.openid = openid
         console.log(this.globalData.openid)
+        const db = wx.cloud.database();
+        db.collection('userAll')
+          .where({
+            _openid: openid
+          })
+          .get({
+            success: res => {
+              let user = res.data;
+              console.log(user[0])
+              this.globalData.stuId = user[0].userid
+            }
+          })
       }
     })
+    
   },
+
   globalData: {
     userInfo: null,
-    stuId:'1754026',
+    stuId:'',
+    stuname:'',
     openid:'',
     ColorList: [{
       title: '嫣红',

@@ -5,7 +5,7 @@
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__bd">
-          <input bindinput="briefInf" class="weui-input" placeholder="请简单描述你队伍的性质 " />
+          <input bindinput="briefInf" class="weui-input" placeholder="请简述队伍性质(例:嘉定到虹桥拼车)" />
         </view>
       </view>
       <view class="weui-cell weui-cell_select">
@@ -59,7 +59,9 @@
         </label>
       </checkbox-group>
     </view>
-    <button type="primary" ontap="raise">发布</button>
+    <view class="padding flex flex-direction">
+      <button ontap="raise" class="cu-btn bg-green margin-tb-sm lg">发起</button>
+    </view>
 
   </view>
 </view>
