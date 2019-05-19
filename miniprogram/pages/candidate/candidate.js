@@ -17,9 +17,11 @@ Page({
     },
     users:{
       major:'',
+      openid: '',
       school:'',
-      username:'',
-      userid:''
+      userid:'',
+      username: '',
+      
     },
     userlist:[],
     tar_openid:''
@@ -37,32 +39,28 @@ Page({
     db.collection('userAll').where({
       userid: '1754026',
     })
-      .get({
+    .get({
         success: res => {
           console.log(res.data)
-          if (res.data) {
-            this.setData({
-              tar_openid: res.data
-            })
-          }
+          let users=res.data
+          this.data.users=res.data
+          console.log(this.data.users)
         },
         fail(res) {
           console.log(fail)
         }
       })
-    console.log(this.data.tar_openid)
+    
     
   },
 
-
+/////////////////发送候选人申请/////////////////////
   makeCandi(e) {
-    console.log(e.detail.value.input)
-    let value = e.detail.value.input //获取输入
     let week = new Date() - (1000 * 60 * 60 * 24 * 7) //建立7天时间戳
     //////////储存formId，并打时间戳/////////////////
     db.collection('formId').add({
       data: {
-        openid: wx.getStorageSync("openid"),
+        openid: this.users.openid,
         formId: e.detail.formId,
         date: (new Date()).valueOf()
       }
@@ -73,7 +71,7 @@ Page({
 
     ///////////获取formId数据 //////////////////
     db.collection('formId').where({
-      _openid: this.data.tar_openid,
+      _openid: this.data.user.openid,
       date: _.gt(week) //获取7天内
     }).get().then(res => {
       console.log(res.data)
@@ -81,10 +79,16 @@ Page({
       let date = new Date();
       let data = JSON.stringify({
         "keyword1": {
-          "value": value
+          "value": this.data.taskOngoing.briefInf
         },
         "keyword2": {
           "value": date
+        },
+        "keyword3": {
+          "value": this.data.users.username
+        },
+        "keyword4": {
+          "value": "13896547502"
         }
       })
       //调用云函数发送模版消息
@@ -108,7 +112,7 @@ Page({
       })
     })
   },
-  
+  ///////////////////删除用过的formid///////////////////
   remove(id) {
     wx.cloud.callFunction({
       name: 'remove',
