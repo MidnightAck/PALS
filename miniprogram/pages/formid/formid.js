@@ -1,38 +1,34 @@
-var app = getApp()
 const db = wx.cloud.database();
 const _ = db.command;
 Page({
   data: {
-    receiveDataShow: true, //接收框开关
-    stuID: '',
-    category: ['比赛', '项目', '拼车', '其他'],
-    taskOngoing: {
-      Giverid: '',
-      Reciverid: [],
-      _id: '',
-      briefInf: '',
-      category: '',
-      taskid: ''
-    },
-    userlist: [],
-    tar_openid: ''
+    receiveDataShow: true //接收框开关
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (option) {
-   
+  onLoad: function (options) {
+    var that = this
+    if (options.sender_openid) {
+      that.setData({
+        receiveData: options, //接收数据
+        receiveDataShow: false //打开接受信息页面
+      })
+    }
+    console.log((new Date()).valueOf())
+    console.log(new Date() - (1000 * 60 * 60 * 24 * 7))
+    console.log(new Date(new Date() - (1000 * 60 * 60 * 24 * 7)))
     //调用云函数获取openid
     wx.cloud.callFunction({
-      name: 'login1',
+      name: 'login',
       data: {},
       success: res => {
-        console.log('[云函数] [login1] user openid: ', res.result.openid)
+        console.log('[云函数] [login] user openid: ', res.result.openid)
         wx.setStorageSync("openid", res.result.openid)
       },
       fail: err => {
-        console.error('[云函数] [login1] 调用失败', err)
+        console.error('[云函数] [login] 调用失败', err)
       }
     })
   },
@@ -49,17 +45,11 @@ Page({
     let date = new Date();
     let data = JSON.stringify({
       "keyword1": {
-        "value": "约搓澡"
+        "value": date
       },
       "keyword2": {
-        "value": "2019年06月05日 16:30"
-      },
-      "keyword3": {
-        "value": "杨超越"
-      },
-      "keyword4": {
-        "value": "13896547502"
-      },
+        "value": "2015年01月05日 12:30"
+      }
     })
     //调用云函数发送模版消息
     wx.cloud.callFunction({
@@ -82,6 +72,8 @@ Page({
   },
   //调用云函数发送给指定用户
   button_two(e) {
+    console.log(e.detail.value.input)
+    let value = e.detail.value.input //获取输入
     let week = new Date() - (1000 * 60 * 60 * 24 * 7) //建立7天时间戳
     //储存formId，并打时间戳
     db.collection('formId').add({
@@ -96,7 +88,7 @@ Page({
       })
     //获取formId数据 
     db.collection('formId').where({
-      _openid: " otd9Z5HK9TfPGRZK7PKzFFlP4nwU",
+      _openid: "otd9Z5HK9TfPGRZK7PKzFFlP4nwU",
       date: _.gt(week) //获取7天内
     }).get().then(res => {
       console.log(res.data)
@@ -104,17 +96,11 @@ Page({
       let date = new Date();
       let data = JSON.stringify({
         "keyword1": {
-          "value": "约搓澡"
+          "value": "fasfasf"
         },
         "keyword2": {
-          "value": "2019年06月05日 16:30"
-        },
-        "keyword3": {
-          "value": "杨超越"
-        },
-        "keyword4": {
-          "value": "13896547502"
-        },
+          "value": date
+        }
       })
       //调用云函数发送模版消息
       wx.cloud.callFunction({
@@ -122,7 +108,7 @@ Page({
         data: {
           openid: formIdList[0].openid,
           template_id: "tckUPjs60Zy94Ixg9ZBiqPgfhQn24_ZdV0b-WoOKFdY",
-          page: "", //携带参数
+          page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
           form_id: formIdList[0].formId,
           data,
           emphasis_keyword: "keyword1.DATA"
@@ -137,7 +123,6 @@ Page({
       })
     })
   },
-  ///////////////////存储formid/////////////
   button_three(e) {
     console.log(e.detail.formId)
     console.log(new Date())

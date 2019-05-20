@@ -27,7 +27,7 @@ Page({
   onShow: function () {
     var that = this
     this.data.stuId=app.globalData.stuId
-   console.log(this.data.stuId)
+    console.log(app.globalData.stuId)
     db.collection('taskOngoing').where(_.or([{
       Giverid: this.data.stuId
     },

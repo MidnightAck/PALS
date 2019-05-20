@@ -51,45 +51,10 @@ Page({
     
   },
 
-  button_one(e) {
-    let form_id = e.detail.formId
-    let date = new Date();
-    let data = JSON.stringify({
-      "keyword1": {
-        "value": "约搓澡"
-      },
-      "keyword2": {
-        "value": "2019年06月05日 16:30"
-      },
-      "keyword3": {
-        "value": "杨超越"
-      },
-      "keyword4": {
-        "value": "13896547502"
-      },
-    })
-    //调用云函数发送模版消息
-    wx.cloud.callFunction({
-      name: 'moban',
-      data: {
-        openid: wx.getStorageSync("openid"),
-        template_id: "tckUPjs60Zy94Ixg9ZBiqPgfhQn24_ZdV0b-WoOKFdY",
-        page: "",
-        form_id,
-        data,
-        emphasis_keyword: "keyword1.DATA"
-      },
-      success: res => {
-        console.log('[云函数] [login] : ', res)
-      },
-      fail: err => {
-        console.error('[云函数] [login] 调用失败', err)
-      }
-    })
-  },
-  //调用云函数发送给指定用户
+ 
   button_two(e) {
-    var tar_openid=this.data.user._openid
+    var candiopenid=this.data.user._openid
+    console.log(candiopenid)
     let week = new Date() - (1000 * 60 * 60 * 24 * 7) //建立7天时间戳
     //储存formId，并打时间戳
     db.collection('formId').add({
@@ -104,7 +69,7 @@ Page({
       })
     //获取formId数据 
     db.collection('formId').where({
-      _openid: 'otd9Z5HK9TfPGRZK7PKzFFlP4nwU',
+      _openid: candiopenid,
       date: _.gt(week) //获取7天内
     }).get().then(res => {
       console.log(res.data)
@@ -112,17 +77,11 @@ Page({
       let date = new Date();
       let data = JSON.stringify({
         "keyword1": {
-          "value": "约搓澡"
+          "value": "组队已确认！"
         },
         "keyword2": {
-          "value": "2019年06月05日 16:30"
-        },
-        "keyword3": {
-          "value": "杨超越"
-        },
-        "keyword4": {
-          "value": "13896547502"
-        },
+          "value": date
+        }
       })
       //调用云函数发送模版消息
       wx.cloud.callFunction({
@@ -130,7 +89,7 @@ Page({
         data: {
           openid: formIdList[0].openid,
           template_id: "tckUPjs60Zy94Ixg9ZBiqPgfhQn24_ZdV0b-WoOKFdY",
-          // page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
+         // page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
           form_id: formIdList[0].formId,
           data,
           emphasis_keyword: "keyword1.DATA"
