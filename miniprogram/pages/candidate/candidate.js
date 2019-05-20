@@ -35,6 +35,7 @@ Page({
         console.error('[云函数] [login1] 调用失败', err)
       }
     })
+   
   },
 ///////////显示候选人信息/////////////////
   onShow:function(){
@@ -59,12 +60,11 @@ Page({
 
 ////////////////选择候选人///////////////////////////
 selectU:function(e){
-  console.log(this.data.taskOngoing)
   var value1 = this.data.taskOngoing.briefInf
   var candiOpenid = this.data.userlist[e.currentTarget.dataset.index]._openid
   var value3 = this.data.userlist[e.currentTarget.dataset.index].username
   var value4 = this.data.userlist[e.currentTarget.dataset.index].wxid
-  console.log(value4)
+  console.log(candiOpenid)
   wx.showModal({
     title: '',
     content: '选择这位朋友吗,我们将提醒他,同时将他的微信号复制到您的剪贴板',
@@ -76,12 +76,11 @@ selectU:function(e){
         wx.setClipboardData({
           data: value4,
         })
-
         let week = new Date() - (1000 * 60 * 60 * 24 * 7) //建立7天时间戳
-        //////////储存formId，并打时间戳/////////////////
+        //储存formId，并打时间戳
         db.collection('formId').add({
           data: {
-            openid: app.globalData.openid,
+            openid: wx.getStorageSync("openid"),
             formId: e.detail.formId,
             date: (new Date()).valueOf()
           }
@@ -89,8 +88,7 @@ selectU:function(e){
           .then(res => {
             console.log(res)
           })
-
-        ///////////获取formId数据 //////////////////
+        //获取formId数据 
         db.collection('formId').where({
           _openid: candiOpenid,
           date: _.gt(week) //获取7天内
@@ -100,23 +98,23 @@ selectU:function(e){
           let date = new Date();
           let data = JSON.stringify({
             "keyword1": {
-              "value": value1
+              "value": "你的组队有了新的消息"
             },
             "keyword2": {
-              "value": date
+              "value": value1
             },
             "keyword3": {
               "value": value3
             },
             "keyword4": {
-              "value": "13896547502"
-            }
+              "value": date
+            },
           })
           //调用云函数发送模版消息
           wx.cloud.callFunction({
             name: 'moban',
             data: {
-              openid: formIdList[0]._openid,
+              openid: formIdList[0].openid,
               template_id: "tckUPjs60Zy94Ixg9ZBiqPgfhQn24_ZdV0b-WoOKFdY",
               //page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
               form_id: formIdList[0].formId,
@@ -125,22 +123,7 @@ selectU:function(e){
             },
             success: res => {
               console.log('模版消息发送成功: ', res)
-              //this.remove(formIdList[0]._id); //调用删除formId函数
-              var id = formIdList[0]._id
-              wx.cloud.callFunction({
-                name: 'remove',
-                data: {
-                  id,
-                },
-                success: res => {
-                  console.log('删除成功：', res)
-                  if (res.result.stats.removed == 1) {
-                  }
-                },
-                fail: err => {
-                  console.log('删除失败：', err)
-                }
-              })
+              this.remove(formIdList[0]._id); //调用删除formId函数
             },
             fail: err => {
               console.error('模版消息发送失败：', err)
@@ -162,12 +145,14 @@ selectU:function(e){
 },
 
 /////////////////发送候选人申请/////////////////////
-  makeCandi(e) {
+  button_two(e) {
+    console.log(e.detail.value.input)
+    let value = e.detail.value.input //获取输入
     let week = new Date() - (1000 * 60 * 60 * 24 * 7) //建立7天时间戳
-    //////////储存formId，并打时间戳/////////////////
+    //储存formId，并打时间戳
     db.collection('formId').add({
       data: {
-        openid: app.globalData.openid,
+        openid: wx.getStorageSync("openid"),
         formId: e.detail.formId,
         date: (new Date()).valueOf()
       }
@@ -175,10 +160,9 @@ selectU:function(e){
       .then(res => {
         console.log(res)
       })
-
-    ///////////获取formId数据 //////////////////
+    //获取formId数据 
     db.collection('formId').where({
-      _openid: app.globalData.openid,
+      _openid: " otd9Z5Fkv946-8C9VChCzsJgMjcw",
       date: _.gt(week) //获取7天内
     }).get().then(res => {
       console.log(res.data)
@@ -186,16 +170,10 @@ selectU:function(e){
       let date = new Date();
       let data = JSON.stringify({
         "keyword1": {
-          "value": this.data.taskOngoing.briefInf
+          "value": value
         },
         "keyword2": {
           "value": date
-        },
-        "keyword3": {
-          "value": this.data.users.username
-        },
-        "keyword4": {
-          "value": "13896547502"
         }
       })
       //调用云函数发送模版消息
@@ -204,7 +182,7 @@ selectU:function(e){
         data: {
           openid: formIdList[0].openid,
           template_id: "tckUPjs60Zy94Ixg9ZBiqPgfhQn24_ZdV0b-WoOKFdY",
-          //page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
+          page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
           form_id: formIdList[0].formId,
           data,
           emphasis_keyword: "keyword1.DATA"
