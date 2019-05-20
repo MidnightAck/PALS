@@ -1,9 +1,9 @@
 {
   "cloud": true,
   "pages": [
-    "pages/first/first",
-    "pages/usercenter/usercenter",
     "pages/Square/Square",
+    "pages/usercenter/usercenter",
+    
     "pages/Test/Test",
     "pages/raise/raise",
     "pages/message/message",
@@ -15,7 +15,8 @@
     "pages/candidate/candidate",
     "pages/formid/formid",
     "pages/rec/rec",
-    "pages/userfile/userfile"
+    "pages/userfile/userfile",
+    "pages/candiinf/candiinf"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -48,7 +49,6 @@
         "iconPath": "images/burger.png",
         "selectedIconPath": "images/burger_focus.png"
       },
-     
       {
         "pagePath": "pages/usercenter/usercenter",
         "text": "我的",

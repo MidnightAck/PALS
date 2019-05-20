@@ -6,15 +6,13 @@ Page({
     receiveDataShow: true, //接收框开关
     stuID: '',
     category: ['比赛', '项目', '拼车', '其他'],
-    taskOngoing: {
-      Giverid: '',
-      Reciverid: [],
-      _id: '',
-      briefInf: '',
-      category: '',
-      taskid: ''
+    user: {
+      _id:'',
+      userid:'',
+      username:'',
+      _openid:'',
+      wxid:''
     },
-    userlist: [],
     tar_openid: ''
   },
 
@@ -22,7 +20,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
-   
+    this.setData({
+      stuID: app.globalData.stuId,
+      user:JSON.parse(option.userlist),
+    })
+
     //调用云函数获取openid
     wx.cloud.callFunction({
       name: 'login1',
@@ -41,9 +43,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
-  //发送给自己模版消息
+
+  ///////////显示候选人信息/////////////////
+  onShow: function () {
+    console.log(this.data.user)
+    
+  },
+
   button_one(e) {
     let form_id = e.detail.formId
     let date = new Date();
@@ -82,6 +89,7 @@ Page({
   },
   //调用云函数发送给指定用户
   button_two(e) {
+    var tar_openid=this.data.user._openid
     let week = new Date() - (1000 * 60 * 60 * 24 * 7) //建立7天时间戳
     //储存formId，并打时间戳
     db.collection('formId').add({
@@ -96,7 +104,7 @@ Page({
       })
     //获取formId数据 
     db.collection('formId').where({
-      _openid: " otd9Z5HK9TfPGRZK7PKzFFlP4nwU",
+      _openid: 'otd9Z5HK9TfPGRZK7PKzFFlP4nwU',
       date: _.gt(week) //获取7天内
     }).get().then(res => {
       console.log(res.data)
@@ -122,7 +130,7 @@ Page({
         data: {
           openid: formIdList[0].openid,
           template_id: "tckUPjs60Zy94Ixg9ZBiqPgfhQn24_ZdV0b-WoOKFdY",
-          page: "", //携带参数
+          // page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
           form_id: formIdList[0].formId,
           data,
           emphasis_keyword: "keyword1.DATA"
@@ -222,4 +230,6 @@ Page({
       }
     })
   }
+
+  
 })

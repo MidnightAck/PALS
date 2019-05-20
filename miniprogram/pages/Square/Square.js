@@ -29,9 +29,43 @@ Page({
     //初始化的时候渲染wxSearchdata
     WxSearch.init(that, 43, ['拼车', '比赛', '游玩', '推剧本', '约电影']);
     WxSearch.initMindKeys(['拼车', '比赛', '游玩', '推剧本', '约电影']);
-
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+          wx.getUserInfo({
+            success(res) {
+              console.log(res.userInfo)
+              wx.switchTab({
+                url: '../Square/Square'
+                //url:'../square/square'
+              })
+            }
+          })
+        }
+        else{
+          wx.showModal({
+            title: '',
+            content: '还未认证用户，是否前往认证',
+            confirmText: "就现在",
+            cancelText: "等一会",
+            success: function (res) {
+              console.log(res)
+              if (res.confirm) {
+                console.log(res)
+                wx.navigateTo({
+                  url: '../userinf/userinf'
+                })
+              }
+              
+            }
+          })
+        }
+      }
+    })
     
   },
+ 
 
   ///////////////////////////搜索框相关///////////////////////////////////
   ///////////////////////////进行搜索/////////////////////////////////////
