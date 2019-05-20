@@ -124,10 +124,27 @@ Page({
       checkboxItems: checkboxItems
     });
   },
+////////////////////////添加formid///////////////////////
+  button_three(e) {
+    console.log(e.detail.formId)
+    console.log(new Date())
+    db.collection('formId').add({
+      data: {
+        openid: wx.getStorageSync("openid"),
+        formId: e.detail.formId,
+        date: (new Date()).valueOf()
+      }
+    })
+      .then(res => {
+        console.log(res)
+      })
+  },
+
   /*------------------------
   发起任务 在数据库中添加记录
   ------------------------*/
-  raise: function () {
+  raise: function (e) {
+    this.button_three(e)
     var that = this;
     if (this.data.brief == '') {
       wx.showModal({

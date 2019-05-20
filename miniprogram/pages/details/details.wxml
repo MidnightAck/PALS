@@ -33,7 +33,8 @@
 
   <view class="padding flex flex-direction">
     
-
-    <button ontap="joinTeam" class="cu-btn bg-red margin-tb-sm lg" disabled="{{disabled}}">加入队伍</button>
+<form report-submit="true" bindsubmit="button_three">
+    <button formType="submit" ontap="joinTeam" class="cu-btn bg-red margin-tb-sm lg" disabled="{{disabled}}">加入队伍</button>
+</form>
   </view>
 </view>

@@ -37,11 +37,25 @@ Page({
   onHide: function () {
     console.log("taskinf page onhide")
   },
-
+  button_three(e) {
+    console.log(e.detail.formId)
+    console.log(new Date())
+    db.collection('formId').add({
+      data: {
+        openid: wx.getStorageSync("openid"),
+        formId: e.detail.formId,
+        date: (new Date()).valueOf()
+      }
+    })
+      .then(res => {
+        console.log(res)
+      })
+  },
 
 
   ///////////////////////加入队伍///////////////////////
-  joinTeam:function(){
+  joinTeam:function(e){
+    this.button_three(e)
     var newid = []
     newid = this.data.taskOngoing.Reciverid
     console.log(newid)

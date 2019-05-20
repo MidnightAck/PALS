@@ -60,7 +60,9 @@
       </checkbox-group>
     </view>
     <view class="padding flex flex-direction">
-      <button ontap="raise" class="cu-btn bg-green margin-tb-sm lg">发起</button>
+    <form report-submit="true" bindsubmit="button_three">
+      <button formType="submit" ontap="raise" class="cu-btn bg-green margin-tb-sm lg">发起</button>
+      </form>
     </view>
 
   </view>
