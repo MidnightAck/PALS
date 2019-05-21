@@ -46,7 +46,17 @@ wx.navigateTo({
   fail: function(res) {},
   complete: function(res) {},
 })
-
+  },
+    /**
+   转向我的收藏
+   */
+  star:function(){
+    wx.navigateTo({
+      url: '../star/star?stuinf=' + JSON.stringify(this.data.stuinf),
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
 
   },
   /**
@@ -134,11 +144,21 @@ wx.navigateTo({
   onShow: function () {
     var that = this
     console.log(app.globalData.openid)
-   
-    this.setData({
-      stuId:app.globalData.stuId
+    db.collection('userAll').where({
+      openid: app.globalData.openid
+    }).get({
+      success: res => {
+        console.log(res.data)
+        if(res.data)
+        this.setData({
+          stuinf: res.data[0]
+        })
+
+      },
+      fail(res) {
+        console.log(fail)
+      }
     })
-      
   },
 
   /**

@@ -126,7 +126,6 @@ Page({
         // 传递给云函数的参数
         data: that.data.stuinf,
         success: res => {
-          console.log(that.data.stuinf)
           console.log("我的资料修改保存成功")
         },
         fail: err => {},
@@ -160,7 +159,6 @@ Page({
         [change_index_chosen]: false
       })
     }
-    console.log("改变")
   },
   /*--------------------------
    隐藏页面时上传新数据

@@ -175,7 +175,7 @@ Page({
         taskid: app.globalData.stuId + '1',
         briefInf: that.data.brief, //简介
         Giverid: app.globalData.stuId, //发起者id
-        Reciverid: [''],
+        Reciverid: [],
         category: that.data.countryIndex.toString(), //类别,
         detailsInf: that.data.details, //具体info
         dateInf: that.data.date, //日期

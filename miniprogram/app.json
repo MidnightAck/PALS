@@ -3,7 +3,6 @@
   "pages": [
     "pages/Square/Square",
     "pages/usercenter/usercenter",
-    
     "pages/Test/Test",
     "pages/raise/raise",
     "pages/message/message",
@@ -16,7 +15,9 @@
     "pages/formid/formid",
     "pages/rec/rec",
     "pages/userfile/userfile",
-    "pages/candiinf/candiinf"
+    "pages/candiinf/candiinf",
+    "pages/star/star",
+    "pages/taskdone/taskdone"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -39,12 +40,6 @@
       },
       {
         "pagePath": "pages/raise/raise",
-        "text": "发起",
-        "iconPath": "images/index.png",
-        "selectedIconPath": "images/index_focus.png"
-      },
-      {
-        "pagePath": "pages/Test/Test",
         "text": "发起",
         "iconPath": "images/index.png",
         "selectedIconPath": "images/index_focus.png"

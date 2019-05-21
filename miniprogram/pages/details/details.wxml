@@ -36,5 +36,6 @@
 <form report-submit="true" bindsubmit="button_three">
     <button formType="submit" ontap="joinTeam" class="cu-btn bg-red margin-tb-sm lg" disabled="{{disabled}}">加入队伍</button>
 </form>
+<button ontap="star" class="cu-btn bg-orange margin-tb-sm lg" disabled="{{star_disabled}}">收藏队伍</button>
   </view>
 </view>

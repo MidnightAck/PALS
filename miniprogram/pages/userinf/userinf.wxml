@@ -15,7 +15,7 @@
     <image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave"></image>
   </view>
   <view class="padding flex text-center text-grey bg-white shadow-warp">
-    <view class="flex flex-sub flex-direction solid-right">
+    <view bindtap='star'class="flex flex-sub flex-direction solid-right">
       <view class="text-xxl text-orange">{{stuinf.starnum}}</view>
       <view class="margin-top-sm">
         <text class="cuIcon-like"></text> 收藏</view>
@@ -37,7 +37,7 @@
     </view>
 
     <view class="cu-item arrow">
-      <navigator class="content" url="/pages/about/test/list" hover-class="none">
+      <navigator class="content" url="../taskdone/taskdone" hover-class="none">
         <text class="cuIcon-time text-orange"></text>
         <text class="text-grey">组队历史</text>
       </navigator>

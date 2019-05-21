@@ -1,0 +1,10 @@
+<!--我的-->
+
+<!--<view>
+<text>\n</text>
+</view>-->
+<i-card bindtap="detailedInf" wx:if="{{stuId!=''}}"wx:for="{{taskOngoing}}" wx:for-index="index" data-index="{{index}}"wx:key="number" title="{{category[item.category]}}" extra="{{item.dateInf}}"thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+  <view slot="content">{{item.briefInf}}</view>
+  <view slot="footer">{{item.teammate}}人</view>
+</i-card>
+

@@ -148,7 +148,7 @@
         <view class="cu-item">
           <view class="content">
             <view class="cu-form-group margin-top ">
-              <textarea maxlength="-1"auto-height='true' value="{{temp.detail}}"bindinput="detail_input" placeholder="请输入个人简介"></textarea>
+              <input maxlength="-1"auto-height='true' value="{{temp.detail}}"bindinput="detail_input" placeholder="请输入个人简介"></input>
             </view>
           </view>
         </view>

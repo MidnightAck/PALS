@@ -5,9 +5,23 @@ const _ = db.command
 Page({
   data: {
     disabled:false,
+    star_disabled: false,
     index: 0,
     stuID: '',
     category: ['比赛', '项目', '拼车', '其他'],
+    stuinf: {
+      openid: '', //_id
+      id: '', //学号
+      name: '', //姓名
+      number: '', //联系方式
+      school: '', //学院
+      major: '', //专业
+      tag: [''], //标签
+      detail: '', //个人简介
+      starnum: 0, //收藏数
+      starlist: [], //收藏任务号
+      userInfo: {} //用户信息
+    },
     taskOngoing: {
       Giverid: '',
       Reciverid: [],
@@ -23,6 +37,25 @@ Page({
       index: option.index,
       stuID: app.globalData.stuId,
       taskOngoing: JSON.parse(option.taskongoing)
+    })
+    db.collection('userAll').where({
+      openid: app.globalData.openid
+    }).get({
+      success: res => {
+        console.log(res.data)
+        if (res.data)
+          this.setData({
+            stuinf: res.data[0]
+          })
+        if (this.data.stuinf.starlist.indexOf(this.data.taskOngoing._id) != -1 || this.data.stuID == '') {
+          this.setData({
+            star_disabled: true
+          })
+        }
+      },
+      fail(res) {
+        console.log(fail)
+      }
     })
     console.log(this.data.taskOngoing)
     ///////////////////////能否加入队伍///////////////////////
@@ -49,6 +82,24 @@ Page({
   onHide: function () {
     console.log("taskinf page onhide")
   },
+   ///////////////////////收藏队伍///////////////////////
+   star: function() {
+    var that = this
+    console.log(app.globalData.openid)
+    console.log(this.data.stuinf.starlist)
+    this.setData({
+      star_disabled: true
+    })
+    db.collection('userAll').doc(this.data.stuinf._id).update({
+      data: {
+        starlist: _.push(this.data.taskOngoing._id),
+        starnum: this.data.stuinf.starnum + 1
+      }
+    })
+
+  },
+
+/////////////////////////添加formid/////////////
   button_three(e) {
     console.log(e.detail.formId)
     console.log(new Date())
