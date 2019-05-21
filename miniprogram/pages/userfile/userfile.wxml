@@ -1,2 +1,159 @@
-<!--miniprogram/pages/userfile/userfile.wxml-->
-<text>miniprogram/pages/userfile/userfile.wxml</text>
+<view class="cu-bar bg-white solid-bottom margin-top">
+  <view class="action">
+    <text class="icon-title text-orange"></text> 基本资料
+  </view>
+  <view class="action">
+    <button class="cu-btn line-green shadow" bindtap="showModal" data-target="basic_mode">修改</button>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='basic_mode'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog" catchtap>
+    <scroll-view scroll-y style="height:350rpx">
+      <view class="cu-list menu text-left solid-top">
+      <view class="margin-top-xl cu-item">
+        <view class="content">
+          <input bindinput="number_change" value="{{stuinf.number}}" class="weui-input" placeholder="联系方式" />
+        </view>
+      </view>
+      <view class="cu-item">
+        <view class="content">
+          <input bindinput="school_change" value="{{stuinf.school}}" class="weui-input" placeholder="学院" />
+        </view>
+      </view>
+      <view class="cu-item">
+        <view class="content">
+          <input bindinput="major_change" value="{{stuinf.major}}" class="weui-input" placeholder="专业" />
+        </view>
+      </view>
+  </view>
+  </scroll-view>
+  <button bindtap="basic_save" class="cu-btn bg-green margin-tb-sm lg">保存</button>
+</view>
+</view>
+<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius ">
+  <view class="cu-item ">
+    <view class="content ">
+      <text class="text-grey ">姓名</text>
+    </view>
+    <view class="action ">
+      <text class="text-grey ">{{stuinf.name}}</text>
+      <!--text-sm-->
+    </view>
+  </view>
+  <view class="cu-item ">
+    <view class="content ">
+      <text class="text-grey ">学号</text>
+    </view>
+    <view class="action ">
+      <text class="text-grey ">{{stuinf.id}}</text>
+      <!--text-sm-->
+    </view>
+  </view>
+  <view class="cu-item ">
+    <view class="content ">
+      <text class="text-grey ">联系方式</text>
+    </view>
+    <view class="action ">
+      <text class="text-grey ">{{stuinf.number}}</text>
+      <!--text-sm-->
+    </view>
+  </view>
+  <view class="cu-item ">
+    <view class="content ">
+      <text class="text-grey ">学院</text>
+    </view>
+    <view class="action ">
+      <text class="text-grey ">{{stuinf.school}}</text>
+      <!--text-sm-->
+    </view>
+  </view>
+  <view class="cu-item ">
+    <view class="content ">
+      <text class="text-grey ">专业</text>
+    </view>
+    <view class="action ">
+      <text class="text-grey ">{{stuinf.major}}</text>
+      <!--text-sm-->
+    </view>
+  </view>
+</view>
+<view class="cu-bar bg-white solid-bottom margin-top">
+  <view class="action ">
+    <text class="icon-title text-orange "></text> {{advice_text}}
+    <!--cuIcon无点-->
+  </view>
+  <view class="action ">
+    <button class="cu-btn margin-right line-green shadow " bindtap="showModal" data-target="tag_add_mode">{{add_text}}</button>
+    <button class="cu-btn line-{{tag_chosen?'red':'green'}} shadow " bindtap="tag_chose_del" data-target="tag_del_mode">{{tag_text}}</button>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='tag_add_mode'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog" catchtap>
+    <scroll-view scroll-y style="height:150rpx">
+      <view class="cu-item">
+        <view class="content">
+          <input bindinput="tag_add" class="margin-top-xl weui-input" placeholder="请输入您的标签" />
+        </view>
+      </view>
+    </scroll-view>
+    <view class="margin-tb-sm  text-center">
+      <button bindtap="tag_add_save" class="cu-btn bg-green">保存</button>
+    </view>
+  </view>
+</view>
+<block wx:if="{{!tag_length}}">
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius ">
+    <view class="cu-item ">
+      <view class="content ">
+        <text class="cuIcon-warn text-green "></text>
+        <text class="text-grey text-sm">添加标签可以让任务发起者更了解你哦！</text>
+        <text class="text-grey ">{{stuinf.detail}}</text>
+      </view>
+    </view>
+  </view>
+</block>
+<block wx:else>
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius ">
+    <view class="cu-item ">
+      <view class="padding-sm flex flex-wrap">
+        <view class="padding-xs" data-index='{{index}}' wx:for="{{temp.tag}}" wx:key bindtap="tag_tap">
+          <view class="cu-tag radius {{item.chosen?'line':'bg'}}-green">{{item.name}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+<view class="cu-bar bg-white solid-bottom margin-top">
+  <view class="action ">
+    <text class="icon-title text-orange "></text> 个人简介
+    <!--cuIcon无点-->
+  </view>
+  <view class="action ">
+    <button class="cu-btn line-green shadow " bindtap="showModal" data-target="detail_mode">修改</button>
+  </view>
+</view>
+<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius ">
+  <view class="cu-item ">
+    <view class="content ">
+      <text wx:if="{{stuinf.detail==''}}" class="cuIcon-warn text-green "></text>
+      <text wx:if="{{stuinf.detail==''}}" class="text-grey text-sm">补充你的个人简介可以让任务发起者更了解你哦！</text>
+      <text class="text-grey ">{{stuinf.detail}}</text>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='detail_mode'?'show':''}}" bindtap="hideModal">
+  <view class=" bg-white cu-dialog" catchtap>
+    <scroll-view scroll-y style="height:800rpx">
+      <view class="cu-list menu text-left solid-top">
+        <view class="cu-item">
+          <view class="content">
+            <view class="cu-form-group margin-top ">
+              <textarea maxlength="-1"auto-height='true' value="{{temp.detail}}"bindinput="detail_input" placeholder="请输入个人简介"></textarea>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <button bindtap="detail_save" class="cu-btn bg-green margin-tb-sm lg">保存</button>
+  </view>
+</view>

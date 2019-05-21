@@ -69,7 +69,7 @@ App({
             success: res => {
               let user = res.data;
               console.log(user[0])
-              this.globalData.stuId = user[0].userid
+              this.globalData.stuId = user[0].id
             }
           })
       }

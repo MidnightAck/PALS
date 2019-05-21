@@ -44,10 +44,10 @@
         "selectedIconPath": "images/index_focus.png"
       },
       {
-        "pagePath": "pages/formid/formid",
-        "text": "测试",
-        "iconPath": "images/burger.png",
-        "selectedIconPath": "images/burger_focus.png"
+        "pagePath": "pages/Test/Test",
+        "text": "发起",
+        "iconPath": "images/index.png",
+        "selectedIconPath": "images/index_focus.png"
       },
       {
         "pagePath": "pages/usercenter/usercenter",

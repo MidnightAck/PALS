@@ -1,4 +1,6 @@
 var app = getApp();
+const db = wx.cloud.database();
+const _ = db.command
 Page({
 
   /**
@@ -6,6 +8,19 @@ Page({
    */
   data: {
     stuId: '',
+    stuinf: {
+      openid: '', //_id
+      id: '', //学号
+      name: '', //姓名
+      number: '', //联系方式
+      school: '', //学院
+      major: '', //专业
+      tag: [''], //标签
+      detail: '', //个人简介
+      starnum: 0, //收藏数
+      starlist: [''], //收藏任务号
+      userInfo: {} //用户信息
+    },
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -22,11 +37,25 @@ Page({
     })
   },
   /**
+   转向我的资料
+   */
+  userfile:function(){
+wx.navigateTo({
+  url: '../userfile/userfile?stuinf=' + JSON.stringify(this.data.stuinf),
+  success: function(res) {},
+  fail: function(res) {},
+  complete: function(res) {},
+})
+
+
+  },
+  /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     if (app.globalData.userInfo) {
       this.setData({
+        stuId:app.globalData.stuId,
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
@@ -52,7 +81,33 @@ Page({
       })
     }
   },
+  /*
+    转向注册界面
+     */
+  rec: function () {
+    if(app.globalData.stuId==''){
+      wx.navigateTo({
+        url: '../rec/rec',
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
+    }
+    else{
+      wx.showToast({
+        title: '您已完成认证',
+        icon: 'success',
+        image: '',
+        duration: 1000,
+        mask: true,
+        success: function(res) {},
+        fail: function(res) {},
+        complete: function(res) {},
+      })
+    }
 
+
+  },
   /*
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -77,9 +132,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this
+    console.log(app.globalData.openid)
+   
     this.setData({
-      stuId: app.globalData.stuId
+      stuId:app.globalData.stuId
     })
+      
   },
 
   /**

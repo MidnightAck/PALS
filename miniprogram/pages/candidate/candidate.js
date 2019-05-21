@@ -50,7 +50,7 @@ Page({
   ///////////显示候选人信息/////////////////
   onShow: function () {
     db.collection('userAll').where({
-      userid: _.in(this.data.taskOngoing.Reciverid)
+      id: _.in(this.data.taskOngoing.Reciverid)
     })
       .get({
         success: res => {

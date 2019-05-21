@@ -1,3 +1,4 @@
+//校友认证页面
 var app = getApp()
 const db = wx.cloud.database()
 Page({
@@ -7,15 +8,62 @@ Page({
   data: {
     authenticated: false,
     img: '',
-    stu_name: '',
-    stu_ID: '',
-    rec_change: 0//条件渲染使能值 0为上传照片 1为修改信息
+    stuinf: {
+      openid: '', //_id
+      id: '', //学号
+      name: '', //姓名
+      number: '', //联系方式
+      school: '', //学院
+      major: '', //专业
+      tag: [], //标签
+      detail: '', //个人简介
+      starnum: 0,//收藏数
+      starlist: [''],//收藏任务号
+      userInfo: {} //用户信息
+    },
+    userInfo: {},
+    hasUserInfo: false,
+    rec_change: 0 //条件渲染使能值 0为上传照片 1为修改信息
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      "stuinf.userInfo": app.globalData.userInfo,
+      "stuinf.openid":app.globalData.openid
+    })
+  },
+  /**
+   * 更新微信号
+   */
+  number: function (e) {
+    var that = this
+    that.setData({
+      "stuinf.number": e.detail.value
+    })
+
+
+  },
+  /**
+   * 更新学院
+   */
+  school: function (e) {
+    var that = this
+    that.setData({
+      "stuinf.school": e.detail.value
+    })
+  },
+  /**
+   * 更新专业
+   */
+  major: function (e) {
+    var that = this
+    that.setData({
+      "stuinf.major": e.detail.value
+    })
+
 
   },
   imageBase64: function (e) {
@@ -46,11 +94,11 @@ Page({
               template_id: 'd5f36dee-6075-4fc0-9e6d-22f8b0817bbb1556179865'
             }
           },
-          success(res) {
+          success(res) {//OCR获取一卡通的姓名和学号赋值本地
             console.log(res)
             that.setData({
-              stu_ID: res.data.items.stu_ID,
-              stu_name: res.data.items.stu_name
+              "stuinf.id": res.data.items.stu_ID,
+              "stuinf.name": res.data.items.stu_name
             })
             that.setData({
               rec_change: 1
@@ -65,7 +113,7 @@ Page({
   save: function () {
     var that = this
     db.collection('userAll').where({
-      userid: this.data.stu_ID // 填入当前用户 openid
+      id:that.data.stuinf.id // 填入当前用户 openid
     }).get({
       success(res) {
         console.log(res.data)
@@ -87,24 +135,34 @@ Page({
             fail: function (res) { },
             complete: function (res) { }
           })
-        }
-        else {
+        } else {
           wx.showLoading({
             title: '正在保存',
           })
-          app.globalData.stuId = that.data.stu_ID;
-          app.globalData.stuname = that.data.stu_name;
-          console
+          app.globalData.stuId = that.data.stuinf.id;
+          app.globalData.stuname = that.data.stuinf.name;
           db.collection('userAll').add({
             data: {
               /*库新添项*/
-              userid: that.data.stu_ID,
-              username: that.data.stu_name
+              openid: that.data.stuinf.openid,
+              id: that.data.stuinf.id,
+              name: that.data.stuinf.name,
+              number: that.data.stuinf.number,
+              school: that.data.stuinf.school,
+              major: that.data.stuinf.major,
+              tag: that.data.stuinf.tag,
+              detail: that.data.stuinf.detail,
+              starnum: that.data.stuinf.starnum,
+              starlist: that.data.stuinf.starlist,
+              userInfo: that.data.stuinf.userInfo,
             },
             success(res) {
               wx.hideLoading();
               wx.showToast({
                 title: '认证成功！',
+              })
+              wx.navigateTo({
+                url: '../userinf/userinf',
               })
               console.log(res)
             },

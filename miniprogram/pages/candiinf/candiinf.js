@@ -8,10 +8,17 @@ Page({
     category: ['比赛', '项目', '拼车', '其他'],
     user: {
       _id:'',
-      userid:'',
-      username:'',
+      id:'',
+      name:'',
       _openid:'',
-      wxid:''
+      number:'',
+      detail:'',
+      major:'',
+      scholl:'',
+      starlist:[],
+      starnum:0,  
+      tag:[],
+      userinfo:null
     },
     tar_openid: ''
   },
@@ -54,7 +61,7 @@ Page({
  
   button_two(e) {
     var candiopenid = this.data.user._openid
-    var wxid = this.data.user.wxid
+    var wxid = this.data.user.number
     wx.showModal({
       title: '',
       content: '确认选择他吗，我们提醒候选人，并将他的微信号复制到剪贴板',
