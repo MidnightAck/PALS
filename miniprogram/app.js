@@ -70,11 +70,12 @@ App({
               let user = res.data;
               console.log(user[0])
               this.globalData.stuId = user[0].id
+              this.globalData.stuname = user[0].name
             }
           })
       }
     })
-    
+
   },
 
   globalData: {

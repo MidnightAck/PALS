@@ -64,6 +64,49 @@ Page({
       }
     });
   },
+
+  ////////////////退出队伍///////////////////////
+  quit: function () {
+    var taskid = this.data.taskOngoing._id
+    var newid = this.data.taskOngoing.Reciverid
+    console.log(newid)
+    let i=newid.indexOf(app.globalData.stuID)
+    newid.splice(i, 1)
+    console.log(newid)
+    var that = this;
+    
+    wx.showModal({
+      title: '',
+      content: '真的要退出吗',
+      confirmText: "是的",
+      cancelText: "手抖",
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          db.collection('taskOngoing').doc(taskid).update({
+            data: {
+              Reciverid: newid
+            },
+            success: res => {
+              this.setData({
+                Reciverid: newid
+              })
+            },
+            fail: err => {
+              icon: 'none',
+                console.error('[数据库] [更新记录] 失败：', err)
+            }
+          })
+          wx.hideToast();
+          wx.switchTab({
+            url: '../usercenter/usercenter'
+          })
+        } else {
+          console.log('用户手抖了')
+        }
+      }
+    });
+  },
 ////////////////查看候选人///////////////////////
   seeCandi:function(){
     var that = this

@@ -35,7 +35,7 @@ Page({
     }
 
     db.collection('userAll').where({
-      userid: this.data.taskOngoing.Giverid
+      id: this.data.taskOngoing.Giverid
     })
       .get({
         success: res => {
@@ -68,6 +68,7 @@ Page({
   ///////////////////////加入队伍///////////////////////
   joinTeam:function(e){
     this.button_three(e)
+    console.log(this.data.candiopenid[0]._openid)
     var newid = []
     var candiopenid=this.data.candiopenid[0]._openid
     console.log(candiopenid)

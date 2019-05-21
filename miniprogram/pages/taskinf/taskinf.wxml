@@ -35,6 +35,7 @@
     <button ontap="update" wx:if="{{taskOngoing.Giverid==stuID}}" class="cu-btn bg-green margin-tb-sm lg">更改队伍信息</button>
     <button ontap="seeCandi" wx:if="{{taskOngoing.Giverid==stuID}}" class="cu-btn bg-yellow margin-tb-sm lg">查看候选人</button>
     <button ontap="dismiss" wx:if="{{taskOngoing.Giverid==stuID}}" class="cu-btn bg-red margin-tb-sm lg">解散队伍</button>
+    
 
     <button ontap="quit" wx:else class="cu-btn bg-red margin-tb-sm lg">退出队伍</button>
   </view>
