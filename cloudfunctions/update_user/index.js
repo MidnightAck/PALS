@@ -3,9 +3,10 @@ const cloud = require('wx-server-sdk')
 cloud.init()
 const db = cloud.database()
 const _ = db.command
+console.log("进来了")
 exports.main = async (event, context) => {
   await db.collection('userAll').where({
-    openid: event.openid
+    _openid: event.openid
   })
     .update({
       data: {

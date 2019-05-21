@@ -128,7 +128,9 @@ Page({
         success: res => {
           console.log("我的资料修改保存成功")
         },
-        fail: err => {},
+        fail: err => {
+          console.log("没成功")
+        },
         complete: () => {
           // ...
         }
