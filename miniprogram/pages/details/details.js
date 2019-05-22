@@ -135,6 +135,21 @@ Page({
       success: function (res) {
         console.log(res)
         if (res.confirm) {
+          /////////////////////////////////////
+          wx.cloud.callFunction({
+            name: 'join',
+            data: {
+              _id: taskid,
+              newid:newid
+            },
+            success: res => {
+              console.log('更新数据成功')
+            },
+            fail: res => {
+              console.log('mei成功')
+            }
+          })
+          ////////////////////////////////////
           
           db.collection('taskOngoing').doc(taskid).update({
             data: {

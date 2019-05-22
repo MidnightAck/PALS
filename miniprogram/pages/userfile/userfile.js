@@ -118,6 +118,7 @@ Page({
       ischanged: true
     })
     console.log(this.data.ischanged)
+    console.log(that.data.stuinf)
     if (this.data.ischanged == true) {
       console.log("修改")
       wx.cloud.callFunction({
