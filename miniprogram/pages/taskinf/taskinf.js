@@ -266,6 +266,24 @@ Page({
               console.log('删除失败：', err)
             }
           })
+           id = formIdList[1]._id
+          wx.cloud.callFunction({
+            name: 'remove',
+            data: {
+              id,
+            },
+            success: res => {
+              console.log('删除成功：', res)
+              if (res.result.stats.removed == 1) {
+                wx.showToast({
+                  title: '删除formId成功',
+                })
+              }
+            },
+            fail: err => {
+              console.log('删除失败：', err)
+            }
+          })
         },
         fail: err => {
           console.error('模版消息发送失败：', err)

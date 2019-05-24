@@ -124,7 +124,7 @@ Page({
       checkboxItems: checkboxItems
     });
   },
-////////////////////////添加formid///////////////////////
+  ////////////////////////添加formid///////////////////////
   button_three(e) {
     console.log(e.detail.formId)
     console.log(new Date())
