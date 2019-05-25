@@ -2013,6 +2013,7 @@ button.icon.lg {
 .cu-timeline {
 	display: block;
 	background-color: var(--white);
+  
 }
 
 .cu-timeline .cu-time {

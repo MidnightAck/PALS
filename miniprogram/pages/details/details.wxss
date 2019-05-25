@@ -1,4 +1,5 @@
 /* miniprogram/pages/details/details.wxss */
+page{background-color:#fff;}
 button[disabled] {
     color: #fff !important;
     background: #5bc0de !important;
@@ -9,4 +10,12 @@ button{
     color: #fff !important;
     background: #0f86ab !important;
     border-color: #46b8da !important;
+}
+
+.raise{
+  	border-radius: 1000rpx;
+  position:fixed;
+  bottom: 130px;
+  right: 20px;
+
 }

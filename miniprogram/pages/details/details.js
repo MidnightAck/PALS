@@ -3,6 +3,7 @@ const db = wx.cloud.database();
 const _ = db.command
 //wx.cloud.init();
 Page({
+  
   data: {
     disabled:false,
     star_disabled: false,
