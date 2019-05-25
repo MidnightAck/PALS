@@ -209,6 +209,7 @@ Page({
     console.log(candiopenid)
     let week = new Date() - (1000 * 60 * 60 * 24 * 7) //建立7天时间戳
     //储存formId，并打时间戳
+    if (e.detail.formId) {
     db.collection('formId').add({
       data: {
         openid: wx.getStorageSync("openid"),
@@ -219,6 +220,7 @@ Page({
       .then(res => {
         console.log(res)
       })
+    }
     //获取formId数据 
     db.collection('formId').where({
       _openid: candiopenid,
@@ -266,24 +268,7 @@ Page({
               console.log('删除失败：', err)
             }
           })
-           id = formIdList[1]._id
-          wx.cloud.callFunction({
-            name: 'remove',
-            data: {
-              id,
-            },
-            success: res => {
-              console.log('删除成功：', res)
-              if (res.result.stats.removed == 1) {
-                wx.showToast({
-                  title: '删除formId成功',
-                })
-              }
-            },
-            fail: err => {
-              console.log('删除失败：', err)
-            }
-          })
+           
         },
         fail: err => {
           console.error('模版消息发送失败：', err)

@@ -1,5 +1,6 @@
 var app = getApp();
 const db = wx.cloud.database();
+const _ = db.command;
 Page({
   data: {
     value: 1,
@@ -128,6 +129,7 @@ Page({
   button_three(e) {
     console.log(e.detail.formId)
     console.log(new Date())
+    if(e.detail.formId){
     db.collection('formId').add({
       data: {
         openid: wx.getStorageSync("openid"),
@@ -138,6 +140,8 @@ Page({
       .then(res => {
         console.log(res)
       })
+    }
+    
   },
 
   /*------------------------
@@ -200,4 +204,6 @@ Page({
       },
     })
   },
+
+  
 });

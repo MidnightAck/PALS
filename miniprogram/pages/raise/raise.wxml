@@ -77,6 +77,8 @@
         </label>
       </checkbox-group>
     </view>
+
+    
     
 
   <!--发布活动  -->
@@ -86,3 +88,4 @@
       </form>
    
 </view>
+

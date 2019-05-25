@@ -1,4 +1,5 @@
     {
+      
       "navigationBarTitleText": "发布活动",
       "usingComponents": {
         "i-card": "../../dist/card/index",
