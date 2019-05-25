@@ -4,8 +4,10 @@
 App({
   
   onLaunch: function() {
-    // 展示本地存储能力
+    this.getSystemInfo();
 
+    // 展示本地存储能力
+    wx.hideTabBar();
     var logs = wx.getStorageSync('logs')
     //logs.unshift(Date.now())
     wx.setStorageSync('logs', logs);
@@ -51,6 +53,18 @@ App({
     that.getOpenid();
     console.log(that.globalData.openid)
   },
+
+  onShow:function(){
+    wx.hideTabBar();
+  },
+  getSystemInfo: function () {
+    let t = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        t.globalData.systemInfo = res;
+      }
+    });
+  },
 ///////////////全局获得openid/////////////
 
   getOpenid() {
@@ -78,7 +92,51 @@ App({
 
   },
 
+  editTabbar: function () {
+    let tabbar = this.globalData.tabBar;
+    let currentPages = getCurrentPages();
+    let _this = currentPages[currentPages.length - 1];
+    let pagePath = _this.route;
+    (pagePath.indexOf('/') != 0) && (pagePath = '/' + pagePath);
+    for (let i in tabbar.list) {
+      tabbar.list[i].selected = false;
+      (tabbar.list[i].pagePath == pagePath) && (tabbar.list[i].selected = true);
+    }
+    _this.setData({
+      tabbar: tabbar
+    });
+  },
+
   globalData: {
+    systemInfo: null,//客户端设备信息
+    tabBar: {
+      "backgroundColor": "#ffffff",
+      "color": "#979795",
+      "selectedColor": "#1c1c1b",
+      "list": [
+        {
+          "pagePath": "/pages/Square/Square",
+          "iconPath": "/tabbarComponent/icon/icon_home.png",
+          "selectedIconPath": "/tabbarComponent/icon/icon_home_HL.png",
+          "text": "首页"
+        },
+        {
+          "pagePath": "/pages/raise/raise",
+          "iconPath": "/tabbarComponent/icon/icon_release.png",
+          "isSpecial": true,
+          "text": "发布"
+        },
+        {
+          "pagePath": "/pages/usercenter/usercenter",
+          "iconPath": "/tabbarComponent/icon/icon_mine.png",
+          "selectedIconPath": "/tabbarComponent/icon/icon_mine_HL.png",
+          "text": "我的"
+        }
+      ]
+    },
+
+
+
     userInfo: null,
     stuId:'',
     stuname:'',

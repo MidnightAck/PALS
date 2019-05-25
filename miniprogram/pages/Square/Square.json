@@ -1,4 +1,5 @@
 {
+  
   "usingComponents": {
     "i-card": "../../dist/card/index",
     "i-panel": "../../dist/panel/index",
@@ -6,6 +7,7 @@
     "i-cell": "../../dist/cell/index",
     "i-index": "../../dist/index/index",
     "i-index-item": "../../dist/index-item/index",
-    "i-button": "../../dist/button/index"
+    "i-button": "../../dist/button/index",
+    "tabbar": "../../tabbarComponent/tabbar"
   }
 }

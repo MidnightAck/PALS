@@ -3,6 +3,7 @@ const db = wx.cloud.database();
 const _ = db.command;
 Page({
   data: {
+    tabbar: {},
     value: 1,
     brief: '',
     details: '',
@@ -61,6 +62,7 @@ Page({
       })
   },
   onLoad: function () {
+    //app.editTabbar();
   },
   /*------------------------
   任务简述setdata

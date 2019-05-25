@@ -1,4 +1,5 @@
 <!--pages/release/release.wxml-->
+<tabbar tabbar="{{tabbar}}"></tabbar>
 <view class='release_view'>
 
   <!--封面图片  -->

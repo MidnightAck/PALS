@@ -6,6 +6,7 @@ const db = wx.cloud.database();
 
 Page({
   data: {
+    tabbar: {},
     feed: [],
     feed_length: 0,
     category: ['比赛', '项目', '拼车', '其他'],
@@ -24,6 +25,7 @@ Page({
   },
   
   onLoad: function() {
+    app.editTabbar();
     console.log('onLoad')
     var that = this
     //初始化的时候渲染wxSearchdata

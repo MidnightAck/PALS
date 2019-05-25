@@ -9,6 +9,7 @@
         "i-index": "../../dist/index/index",
         "i-index-item": "../../dist/index-item/index",
         "i-button": "../../dist/button/index",
-        "i-input-number": "../../dist/input-number/index"
+        "i-input-number": "../../dist/input-number/index",
+        "tabbar": "../../tabbarComponent/tabbar"
       }
     }

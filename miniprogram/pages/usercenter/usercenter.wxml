@@ -1,4 +1,5 @@
 <!--我的-->
+<tabbar tabbar="{{tabbar}}"></tabbar>
 <i-button bind:click="userinf" type="success" shape="circle" size="small">个人中心</i-button>
 <!--<view>
 <text>\n</text>

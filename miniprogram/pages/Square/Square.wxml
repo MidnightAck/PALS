@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <import src="/wxSearch/wxSearch.wxml"/>
-
+<tabbar tabbar="{{tabbar}}"></tabbar>
 <view class= page>
 <view class="wxSearch-section">
   <view class="wxSearch-pancel">

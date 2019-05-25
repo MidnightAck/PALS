@@ -38,12 +38,7 @@
         "iconPath": "images/discovery.png",
         "selectedIconPath": "images/discovery_focus.png"
       },
-      {
-        "pagePath": "pages/raise/raise",
-        "text": "发起",
-        "iconPath": "images/index.png",
-        "selectedIconPath": "images/index_focus.png"
-      },
+     
      
       {
         "pagePath": "pages/usercenter/usercenter",

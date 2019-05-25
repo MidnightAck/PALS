@@ -4,6 +4,7 @@ const db = wx.cloud.database();
 const _ = db.command
 Page({
   data: {
+    tabbar: {},
     category: ['比赛', '项目', '拼车', '其他'],
     taskOngoing: [{
       Giverid: '',
@@ -19,6 +20,10 @@ Page({
       taskid: '',
       stuId: ''
     }],
+  },
+
+  onLoad:function(){
+    app.editTabbar();
   },
   /*------------------------
   页面显示时加载最新数据库
