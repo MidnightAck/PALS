@@ -29,6 +29,8 @@ Page({
       starlist: [''], //收藏任务号
       userInfo: {} //用户信息
     },
+    userlist: [],
+    tar_openid: ''
   },
   onLoad: function (option) {
 
@@ -65,6 +67,8 @@ Page({
       }
     })
   },
+
+
   ////////////////更新队伍信息///////////////////////
   update: function (event) {
     var that = this
@@ -74,6 +78,25 @@ Page({
       fail: function (res) { },
       complete: function (res) { },
     })
+  },
+
+  onShow:function(){
+    db.collection('userAll').where({
+      id: _.in(this.data.taskOngoing.Reciverid)
+    })
+      .get({
+        success: res => {
+          console.log(res.data)
+          this.setData({
+            userlist: res.data
+          })
+          console.log(this.data.userlist)
+        },
+        fail(res) {
+          console.log(fail)
+        }
+
+      })
   },
   ////////////////解散队伍///////////////////////
   dismiss: function () {
@@ -288,5 +311,16 @@ Page({
       fail: function (res) { },
       complete: function (res) { },
     })
-  }
+  },
+  candidetail: function (event) {
+    var that = this
+    console.log(that.data.userlist[event.currentTarget.dataset.index])
+    wx.navigateTo({
+      url: '../candiinf/candiinf?index=' + event.currentTarget.dataset.index + '&userlist=' + JSON.stringify(that.data.userlist[event.currentTarget.dataset.index]),
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+
+  },
 });
