@@ -143,7 +143,7 @@ Page({
     var that = this
     console.log(that.data.taskOngoing[event.currentTarget.dataset.index])
     wx.navigateTo({
-      url: '../details/details?index=' + event.currentTarget.dataset.index + '&taskongoing=' + JSON.stringify(that.data.taskOngoing[event.currentTarget.dataset.index]),
+      url: '../taskinf/taskinf?index=' + event.currentTarget.dataset.index + '&taskongoing=' + JSON.stringify(that.data.taskOngoing[event.currentTarget.dataset.index]),
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},

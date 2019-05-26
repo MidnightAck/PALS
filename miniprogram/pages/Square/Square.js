@@ -395,17 +395,8 @@ Page({
 
           console.log(candiopenid)
           let week = new Date() - (1000 * 60 * 60 * 24 * 7) //建立7天时间戳
-          //储存formId，并打时间戳
-          db.collection('formId').add({
-            data: {
-              openid: wx.getStorageSync("openid"),
-              formId: e.detail.formId,
-              date: (new Date()).valueOf()
-            }
-          })
-            .then(res => {
-              console.log(res)
-            })
+         
+          
           //获取formId数据 
           db.collection('formId').where({
             _openid: candiopenid,
@@ -475,7 +466,8 @@ Page({
   },
 
   ///////////////////////收藏队伍///////////////////////
-  star: function () {
+  star: function (e) {
+    console.log(e.currentTarget.dataset.target)
     var that = this
     console.log(app.globalData.openid)
     console.log(this.data.starman.starlist)

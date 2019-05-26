@@ -6,6 +6,8 @@ Page({
   data: {
     index: 0,
     stuID: '',
+    feed: [],
+    feed_length: 0,
     category: ['比赛', '项目', '拼车', '其他'],
     taskOngoing: {
       Giverid: '',
@@ -29,6 +31,8 @@ Page({
       starlist: [''], //收藏任务号
       userInfo: {} //用户信息
     },
+    userlist: [],
+    tar_openid: ''
   },
   onLoad: function (option) {
 
@@ -64,6 +68,25 @@ Page({
         console.error('[云函数] [login1] 调用失败', err)
       }
     })
+  },
+
+  onShow: function () {
+    db.collection('userAll').where({
+      id: _.in(this.data.taskOngoing.Reciverid)
+    })
+      .get({
+        success: res => {
+          console.log(res.data)
+          this.setData({
+            userlist: res.data
+          })
+          console.log(this.data.userlist)
+        },
+        fail(res) {
+          console.log(fail)
+        }
+
+      })
   },
   ////////////////更新队伍信息///////////////////////
   update: function (event) {
@@ -296,5 +319,146 @@ Page({
       fail: function (res) { },
       complete: function (res) { },
     })
-  }
+  },
+
+  showModal: function (e) {
+    console.log(e.currentTarget)
+    this.setData({
+      modalName: e.currentTarget.dataset.target,
+      modalIndex: e.currentTarget.dataset.index
+    })
+    console.log("触发任务名:" + this.data.userlist[this.data.modalIndex].name)
+    console.log("触发任务名:" + this.data.userlist[this.data.modalIndex]._openid)
+    db.collection('userAll').where({
+      openid: this.data.userlist[this.data.modalIndex]._openid
+    }).get({
+      success: res => {
+        console.log(res.data)
+        this.setData({
+          stuinf: res.data[0]
+        })
+      },
+      fail(res) {
+        console.log(fail)
+      }
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+  tabSelect(e) {
+    console.log(e);
+    this.setData({
+      TabCur: e.currentTarget.dataset.id,
+      scrollLeft: (e.currentTarget.dataset.id - 1) * 60
+    })
+  },
+
+  button_two(e) {
+    this.button_three(e)
+    var candiopenid = this.data.userlist[this.data.modalIndex]._openid
+    var wxid = this.data.userlist[this.data.modalIndex].number
+    wx.showModal({
+      title: '',
+      content: '确认选择他吗，我们提醒候选人，并将他的微信号复制到剪贴板',
+      confirmText: "那当然",
+      cancelText: "再想想",
+      success: function (res) {
+        console.log(res)
+        if (res.confirm) {
+          wx.setClipboardData({
+            data: wxid
+          })
+
+          console.log(candiopenid)
+          let week = new Date() - (1000 * 60 * 60 * 24 * 7) //建立7天时间戳
+          
+          //获取formId数据 
+          db.collection('formId').where({
+            _openid: candiopenid,
+            date: _.gt(week) //获取7天内
+          }).get().then(res => {
+            console.log(res.data)
+            var formIdList = res.data
+            let date = new Date();
+            let data = JSON.stringify({
+              "keyword1": {
+                "value": "组队已确认！"
+              },
+              "keyword2": {
+                "value": date
+              }
+            })
+            //调用云函数发送模版消息
+            wx.cloud.callFunction({
+              name: 'moban',
+              data: {
+                openid: formIdList[0].openid,
+                template_id: "tckUPjs60Zy94Ixg9ZBiqPgfhQn24_ZdV0b-WoOKFdY",
+                // page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
+                form_id: formIdList[0].formId,
+                data,
+                emphasis_keyword: "keyword1.DATA"
+              },
+              success: res => {
+                console.log('模版消息发送成功: ', res)
+                var id = formIdList[0]._id
+                wx.cloud.callFunction({
+                  name: 'remove',
+                  data: {
+                    id,
+                  },
+                  success: res => {
+                    console.log('删除成功：', res)
+                    if (res.result.stats.removed == 1) {
+                      wx.showToast({
+                        title: '删除formId成功',
+                      })
+                    }
+                  },
+                  fail: err => {
+                    console.log('删除失败：', err)
+                  }
+                })
+              },
+              fail: err => {
+                console.error('模版消息发送失败：', err)
+              }
+            })
+          })
+          wx.showModal({
+            title: '申请成功',
+            content: '我们已经告诉发起人啦',
+            showCancel: false,
+            confirmText: '确认'
+          })
+        }
+        else {
+          console.log('用户手抖了')
+        }
+      }
+    })
+
+
+  },
+  ///////////////////存储formid/////////////
+  button_three(e) {
+    console.log(e.detail.formId)
+    console.log(new Date())
+    if(e.detail.formId){
+    db.collection('formId').add({
+      data: {
+        openid: wx.getStorageSync("openid"),
+        formId: e.detail.formId,
+        date: (new Date()).valueOf()
+      }
+    })
+      .then(res => {
+        console.log(res)
+      })
+    }
+  },
+
 });
