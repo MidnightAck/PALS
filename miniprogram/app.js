@@ -1,11 +1,6 @@
-  //app.js
-
-
 App({
-  
-  onLaunch: function() {
+  onLaunch: function () {
     this.getSystemInfo();
-
     // 展示本地存储能力
     wx.hideTabBar();
     var logs = wx.getStorageSync('logs')
@@ -54,7 +49,7 @@ App({
     console.log(that.globalData.openid)
   },
 
-  onShow:function(){
+  onShow: function () {
     wx.hideTabBar();
   },
   getSystemInfo: function () {
@@ -65,7 +60,7 @@ App({
       }
     });
   },
-///////////////全局获得openid/////////////
+  ///////////////全局获得openid/////////////
 
   getOpenid() {
     let that = this;
@@ -123,8 +118,8 @@ App({
         {
           "pagePath": "/pages/raise/raise",
           "iconPath": "/tabbarComponent/icon/icon_release.png",
-          "isSpecial": true,
-          "text": "发布"
+          "isSpecial": true
+          
         },
         {
           "pagePath": "/pages/usercenter/usercenter",
@@ -138,9 +133,9 @@ App({
 
 
     userInfo: null,
-    stuId:'',
-    stuname:'',
-    openid:'',
+    stuId: '',
+    stuname: '',
+    openid: '',
     ColorList: [{
       title: '嫣红',
       name: 'red',

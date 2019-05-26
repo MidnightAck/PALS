@@ -1,12 +1,3 @@
-/* miniprogram/pages/details/details.wxss */
-button[disabled] {
-    color: #fff !important;
-    background: #5bc0de !important;
-    border-color: #46b8da !important;
-}
-
-button{
-    color: #fff !important;
-    background: #0f86ab !important;
-    border-color: #46b8da !important;
+page{
+  text-align: center
 }

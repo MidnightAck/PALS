@@ -29,8 +29,6 @@ Page({
       starlist: [''], //收藏任务号
       userInfo: {} //用户信息
     },
-    userlist: [],
-    tar_openid: ''
   },
   onLoad: function (option) {
 
@@ -67,8 +65,6 @@ Page({
       }
     })
   },
-
-
   ////////////////更新队伍信息///////////////////////
   update: function (event) {
     var that = this
@@ -78,25 +74,6 @@ Page({
       fail: function (res) { },
       complete: function (res) { },
     })
-  },
-
-  onShow:function(){
-    db.collection('userAll').where({
-      id: _.in(this.data.taskOngoing.Reciverid)
-    })
-      .get({
-        success: res => {
-          console.log(res.data)
-          this.setData({
-            userlist: res.data
-          })
-          console.log(this.data.userlist)
-        },
-        fail(res) {
-          console.log(fail)
-        }
-
-      })
   },
   ////////////////解散队伍///////////////////////
   dismiss: function () {
@@ -119,9 +96,12 @@ Page({
             }
           })
           wx.hideToast();
-          wx.switchTab({
+          wx.navigateTo({
             url: '../usercenter/usercenter'
           })
+          /*wx.switchTab({
+            url: '../usercenter/usercenter'
+          })*/
         } else {
           console.log('用户手抖了')
         }
@@ -162,9 +142,13 @@ Page({
             }
           })
           wx.hideToast();
-          wx.switchTab({
+          wx.navigateTo({
             url: '../usercenter/usercenter'
           })
+          /*
+          wx.switchTab({
+            url: '../usercenter/usercenter'
+          })*/
         } else {
           console.log('用户手抖了')
         }
@@ -210,9 +194,13 @@ Page({
               showCancel: false,
               success: function (res) {
                 if (res.confirm) { //发布成功后
-                  wx.switchTab({
+                  wx.navigateTo({
                     url: '../usercenter/usercenter'
                   })
+                  /*
+                  wx.switchTab({
+                    url: '../usercenter/usercenter'
+                  })*/
                 }
               },
             })
@@ -232,7 +220,6 @@ Page({
     console.log(candiopenid)
     let week = new Date() - (1000 * 60 * 60 * 24 * 7) //建立7天时间戳
     //储存formId，并打时间戳
-    if (e.detail.formId) {
     db.collection('formId').add({
       data: {
         openid: wx.getStorageSync("openid"),
@@ -243,7 +230,6 @@ Page({
       .then(res => {
         console.log(res)
       })
-    }
     //获取formId数据 
     db.collection('formId').where({
       _openid: candiopenid,
@@ -265,7 +251,7 @@ Page({
         name: 'moban',
         data: {
           openid: formIdList[0].openid,
-          template_id: "tckUPjs60Zy94Ixg9ZBiqPgfhQn24_ZdV0b-WoOKFdY",
+          template_id: "pzbQQAXf-QApTUrlYoUJ384DEVY4IQmShIFQ_ds_I0Q",
           // page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
           form_id: formIdList[0].formId,
           data,
@@ -291,7 +277,6 @@ Page({
               console.log('删除失败：', err)
             }
           })
-           
         },
         fail: err => {
           console.error('模版消息发送失败：', err)
@@ -311,16 +296,5 @@ Page({
       fail: function (res) { },
       complete: function (res) { },
     })
-  },
-  candidetail: function (event) {
-    var that = this
-    console.log(that.data.userlist[event.currentTarget.dataset.index])
-    wx.navigateTo({
-      url: '../candiinf/candiinf?index=' + event.currentTarget.dataset.index + '&userlist=' + JSON.stringify(that.data.userlist[event.currentTarget.dataset.index]),
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-
-  },
+  }
 });

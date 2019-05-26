@@ -60,7 +60,6 @@ Page({
 
  
   button_two(e) {
-    this.button_three(e)
     var candiopenid = this.data.user._openid
     var wxid = this.data.user.number
     wx.showModal({
@@ -77,9 +76,17 @@ Page({
           
           console.log(candiopenid)
           let week = new Date() - (1000 * 60 * 60 * 24 * 7) //建立7天时间戳
-
           //储存formId，并打时间戳
-         
+          db.collection('formId').add({
+            data: {
+              openid: wx.getStorageSync("openid"),
+              formId: e.detail.formId,
+              date: (new Date()).valueOf()
+            }
+          })
+            .then(res => {
+              console.log(res)
+            })
           //获取formId数据 
           db.collection('formId').where({
             _openid: candiopenid,
@@ -101,7 +108,7 @@ Page({
               name: 'moban',
               data: {
                 openid: formIdList[0].openid,
-                template_id: "tckUPjs60Zy94Ixg9ZBiqPgfhQn24_ZdV0b-WoOKFdY",
+                template_id: "pzbQQAXf-QApTUrlYoUJ384DEVY4IQmShIFQ_ds_I0Q",
                 // page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
                 form_id: formIdList[0].formId,
                 data,
@@ -152,7 +159,6 @@ Page({
   button_three(e) {
     console.log(e.detail.formId)
     console.log(new Date())
-    if(e.detail.formId){
     db.collection('formId').add({
       data: {
         openid: wx.getStorageSync("openid"),
@@ -163,7 +169,6 @@ Page({
       .then(res => {
         console.log(res)
       })
-    }
   },
   //回复消息
   receive(e) {

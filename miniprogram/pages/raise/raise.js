@@ -3,7 +3,6 @@ const db = wx.cloud.database();
 const _ = db.command;
 Page({
   data: {
-    tabbar: {},
     value: 1,
     brief: '',
     details: '',
@@ -62,7 +61,6 @@ Page({
       })
   },
   onLoad: function () {
-    //app.editTabbar();
   },
   /*------------------------
   任务简述setdata
@@ -131,19 +129,18 @@ Page({
   button_three(e) {
     console.log(e.detail.formId)
     console.log(new Date())
-    if(e.detail.formId){
-    db.collection('formId').add({
-      data: {
-        openid: wx.getStorageSync("openid"),
-        formId: e.detail.formId,
-        date: (new Date()).valueOf()
-      }
-    })
-      .then(res => {
-        console.log(res)
+    if (e.detail.formId != null) {
+      db.collection('formId').add({
+        data: {
+          openid: wx.getStorageSync("openid"),
+          formId: e.detail.formId,
+          date: (new Date()).valueOf()
+        }
       })
+        .then(res => {
+          console.log(res)
+        })
     }
-    
   },
 
   /*------------------------
@@ -186,7 +183,8 @@ Page({
         detailsInf: that.data.details, //具体info
         dateInf: that.data.date, //日期
         teammate: that.data.value, //队友人数
-        checkboxItems: that.data.checkboxItems //高级设置
+        checkboxItems: that.data.checkboxItems ,//高级设置
+        avotor: app.globalData.userInfo.avatarUrl//发起者头像
       },
       success(res) {
         wx.hideToast();

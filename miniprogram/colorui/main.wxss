@@ -2013,7 +2013,6 @@ button.icon.lg {
 .cu-timeline {
 	display: block;
 	background-color: var(--white);
-  
 }
 
 .cu-timeline .cu-time {
@@ -3933,7 +3932,8 @@ scroll-view.cu-steps .cu-item {
 .line-black,
 .lines-black {
 	color: var(--black);
-}
+} 
+
 
 .text-white,
 .line-white,

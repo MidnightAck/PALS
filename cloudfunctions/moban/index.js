@@ -2,7 +2,7 @@
 const cloud = require('wx-server-sdk')
 const got = require('got');
 //输入自己的APPID和SECRET
-const reptileUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx1c415eb52fe7f500&secret=0f0d2aa5da75b3e19a80808d5c7bd01c";
+const reptileUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx12464d3e7cd7931b&secret=a3fb528eaf2204d6adbf0f63eaca1127";
 //分别填入appid和secret
 const MessageUrl = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token="
 cloud.init()

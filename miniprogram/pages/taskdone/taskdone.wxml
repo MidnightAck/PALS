@@ -2,8 +2,23 @@
 <!--<view>
 <text>\n</text>
 </view>-->
-<i-card bindtap="detailedInf" wx:if="{{stuId!=''}}"wx:for="{{taskOngoing}}" wx:for-index="index" data-index="{{index}}"wx:key="number" title="{{category[item.category]}}" extra="{{item.dateInf}}"thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
-  <view slot="content">{{item.briefInf}}</view>
-  <view slot="footer">{{item.teammate}}人</view>
-</i-card>
-
+<view wx:if="{{stuId!=''&&currentTab!=(item.Giverid===stuId)}}" wx:for="{{taskOngoing}}" wx:for-index="index" data-index="{{index}}" wx:key="number" class='pal_card'>
+  <view class='giver'>
+    <image src="{{item.avotor}}"></image>
+  </view>
+  <view class='basinf'>
+    <view class='taskbrief'>
+      <text>{{item.briefInf}}</text>
+    </view>
+    <view class='tasktag'>
+      <text>{{category[item.category]}}</text>
+    </view>
+    <view class='taskmate'>
+      <text>所需人数:{{item.teammate}}人</text>
+      <text class="cuIcon-profile text-black">参与候选人：{{item.Reciverid.length}}人</text>
+    </view>
+  </view>
+  <view class='taskdue'>
+    <text>候选截止日期：{{item.dateInf}}</text>
+  </view>
+</view>

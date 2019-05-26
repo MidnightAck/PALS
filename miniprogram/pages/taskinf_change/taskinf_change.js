@@ -3,6 +3,31 @@ const db = wx.cloud.database();
 //wx.cloud.init();
 Page({
   data: {
+    tabbar: {
+      "color": "#999999",
+      "selectedColor": "#7788dd",
+      "borderStyle": "#dcdcdc",
+      "backgroundColor": "#ffffff",
+      "list": [{
+        "key": "home",
+        "iconPath": "/images/icon_home.png",
+        "selectedIconPath": "/images/icon_home_active.png",
+        "text": "广场"
+      },
+      {
+        "key": "new",
+        "iconPath": "/images/icon_plus_big.png",
+        "iconType": "big overflow circle shadow",
+        "choose": "disable"
+      },
+      {
+        "key": "me",
+        "iconPath": "/images/icon_me.png",
+        "selectedIconPath": "/images/icon_me_active.png",
+        "text": "我的"
+      }
+      ]
+    },
     index: 0,
     stuID: '',
     date: "2019-09-01",
@@ -92,6 +117,20 @@ Page({
       'taskOngoing.briefInf': e.detail.value
     })
   },
+  //////自定义tabbar切换/////////////////
+  tabChange: function (e) {
+    var key = e.detail.key
+    if (key == 'new') {
+      wx.navigateTo({
+        url: '../raise/raise',
+      })
+    } else if (key == 'me') {
+      wx.navigateTo({
+        url: '../usercenter/usercenter',
+      })
+
+    }
+  },
   /*队伍详细内容更改 */
   detailsInf: function(e) {
     this.setData({
@@ -121,6 +160,9 @@ Page({
           confirmColor: '',
           success: function (res) { 
             if(res.confirm){//保存修改后
+              wx.navigateTo({
+                url: '../usercenter/usercenter'
+              })
               wx.switchTab({
                 url: '../usercenter/usercenter'
               })

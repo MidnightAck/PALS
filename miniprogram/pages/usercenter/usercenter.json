@@ -7,6 +7,6 @@
     "i-index": "../../dist/index/index",
     "i-index-item": "../../dist/index-item/index",
     "i-button": "../../dist/button/index",
-    "tabbar": "../../tabbarComponent/tabbar"
+     "tabbar": "../../tabbarComponent/tabbar"
   }
 }

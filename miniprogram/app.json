@@ -19,34 +19,31 @@
     "pages/star/star",
     "pages/taskdone/taskdone"
   ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTitleText": "PALS",
-    "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true
-  },
   "tabBar": {
-    "color": "#626567",
-    "selectedColor": "#2A8CE5",
-    "backgroundColor": "#FBFBFB",
-    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "color": "#979795",
+    "selectedColor": "#1c1c1b",
     "list": [
       {
         "pagePath": "pages/Square/Square",
-        "text": "广场",
-        "iconPath": "images/discovery.png",
-        "selectedIconPath": "images/discovery_focus.png"
+        "text": "首页",
+        "iconPath": "tabbarComponent/icon/icon_home.png",
+        "selectedIconPath": "tabbarComponent/icon/icon_home_HL.png"
       },
-     
-     
       {
         "pagePath": "pages/usercenter/usercenter",
         "text": "我的",
-        "iconPath": "images/burger.png",
-        "selectedIconPath": "images/burger_focus.png"
+        "iconPath": "tabbarComponent/icon/icon_mine.png",
+        "selectedIconPath": "tabbarComponent/icon/icon_mine_HL.png"
       }
     ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F0D542",
+    "navigationBarTitleText": "PALS",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
   },
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom"

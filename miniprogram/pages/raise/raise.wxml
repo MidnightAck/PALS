@@ -1,12 +1,7 @@
 <!--pages/release/release.wxml-->
-<tabbar tabbar="{{tabbar}}"></tabbar>
 <view class='release_view'>
 
-  <!--封面图片  -->
-  <view class='the_cover_view' >
-    <image src="../../images/icon/index.png" style='width:{{the_cover_wigth}}%;' mode="aspectFit" class='the_cover_view_images'></image>  
-  </view>
-  <!--封面图片  -->
+
 
 
   <!--活动内容  -->
@@ -16,7 +11,7 @@
       <input placeholder='活动标题' bindinput="briefInf"></input>
     </view>
     <view class='the_content_content'>
-      <textarea maxlength='500' placeholder='填写活动的内容，让更多的小伙伴参加活动吧！(标题内容不能包含多个空格，不能包含特殊字符)' bindinput='detailsInf' ></textarea>
+      <textarea maxlength='500' placeholder='填写活动的内容，让更多的小伙伴参加活动吧！(标题内容不能包含多个空格，不能包含特殊字符)' bindinput='detailsInf'></textarea>
     </view>
   </view>
   <!--活动内容  -->
@@ -33,7 +28,7 @@
       </picker>
     </view>
   </view>
-  
+
   <!--开始时间结束时间  -->
 
 
@@ -61,32 +56,31 @@
   </view>
   <!--限制人数  -->
   <view class='the_content_title_view'>
-      <image src='../../images/icon/kaorder0.png'></image>
-      <view>高级设置</view>
-    </view>
+    <image src='../../images/icon/kaorder0.png'></image>
+    <view>高级设置</view>
+  </view>
 
-    <view class="weui-cells weui-cells_after-title">
-      <checkbox-group bindchange="checkboxChange">
-        <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="value">
-          <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
+  <view class="weui-cells weui-cells_after-title">
+    <checkbox-group bindchange="checkboxChange">
+      <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="value">
+        <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}" />
 
-          <view class="weui-cell__hd weui-check__hd_in-checkbox">
-            <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
-            <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
-          </view>
-          <view class="weui-cell__bd">{{item.name}}</view>
-        </label>
-      </checkbox-group>
-    </view>
+        <view class="weui-cell__hd weui-check__hd_in-checkbox">
+          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+        </view>
+        <view class="weui-cell__bd">{{item.name}}</view>
+      </label>
+    </checkbox-group>
+  </view>
 
-    
-    
+
+
 
   <!--发布活动  -->
 
-      <form report-submit="true" bindsubmit="button_three">
-      <button formType="submit" ontap="raise" class='get_initiate'>发起</button>
-      </form>
-   
-</view>
+  <form report-submit="true" bindsubmit="button_three">
+    <button formType="submit" ontap="raise" class='get_initiate'>发起</button>
+  </form>
 
+</view>

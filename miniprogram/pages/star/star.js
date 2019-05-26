@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    ----------------*/
   data: {
+    category: ['比赛', '项目', '拼车', '其他'],
     stuinf: {
       openid: '', //_id
       id: '', //学号
@@ -17,7 +18,7 @@ Page({
       tag: [], //标签
       detail: '', //个人简介
       starnum: 0, //收藏数
-      starlist: [], //收藏任务号
+      starlist: [''], //收藏任务号
       userInfo: {} //用户信息
     },
     taskOngoing: [{
@@ -27,7 +28,7 @@ Page({
       briefInf: '',
       category: '',
       length: 0
-    }]
+    }],
   },
   onLoad: function(option) {
    
@@ -52,32 +53,5 @@ Page({
         console.log(fail)
       }
     })
-  },
-
-  cancle:function(event){
-    var starlist
-    var that = this
-    console.log(that.data.taskOngoing[event.currentTarget.dataset.index]._id)
-    var cancleid = that.data.taskOngoing[event.currentTarget.dataset.index]._id
-    var starlist = this.data.stuinf.starlist
-    
-    let i = starlist.indexOf(cancleid)
-    starlist.splice(i, 1)
-    console.log(starlist)
-    db.collection('userAll').doc(this.data.stuinf._id).update({
-      data: {
-        starlist: starlist,
-        starnum: this.data.stuinf.starnum - 1
-      }
-    })
-        
-        
-    
-
-  },
-
-  remove:function(){
-    console.log(this.data.starlist)
-    
   }
 })

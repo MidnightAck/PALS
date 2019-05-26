@@ -18,7 +18,7 @@ Page({
       tag: [], //标签
       detail: '', //个人简介
       starnum: 0,//收藏数
-      starlist: [''],//收藏任务号
+      starlist: [],//收藏任务号
       userInfo: {} //用户信息
     },
     userInfo: {},

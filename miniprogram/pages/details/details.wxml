@@ -1,10 +1,4 @@
 
-  <!--封面图片  -->
-  <view class='the_cover_view' >
-    <image src="../../images/icon/ditumoshi.png" style='width:{{the_cover_wigth}}%;' mode="aspectFit" class='the_cover_view_images'></image>  
-  </view>
-  <!--封面图片  -->
-
 <view class="cu-timeline">
   <view class="cu-time" >任务详情</view>
   <view class="cu-item cur cuIcon-noticefill">

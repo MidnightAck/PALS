@@ -1,1 +1,312 @@
 /* pages/taskdone/taskdone.wxss */
+.userinf {
+  width: 100%;
+  float: left;
+  background: #fff;
+  padding-bottom: 3%;
+}
+
+.avotor {
+  float: left;
+  margin-top: 3%;
+}
+
+.avotor image {
+  width: 120rpx;
+  height: 120rpx;
+  float: left;
+  margin-left: 28rpx;
+  margin-right: 10px;
+  border-radius: 100rpx;
+}
+
+.username {
+  font-size: 18px;
+  font-weight: bold;
+  float: left;
+  margin-top: 4%;
+  margin-bottom: 1%;
+  color: #000;
+  width: 60%;
+}
+
+.userschool {
+  font-size: 13px;
+  color: #999;
+  width: 60%;
+  margin-top:20px;
+}
+
+.userinftap {
+  float: right;
+  position: absolute;
+  right: 3%;
+  width: 50%;
+  margin-top: -15%;
+}
+
+.userinftap image {
+  width: 32px;
+  height: 32px;
+  float: right;
+}
+
+.top5q {
+  float: left;
+  width: 90%;
+  margin-left: 28rpx;
+}
+
+.top5q image {
+  width: 59px;
+  height: 31px;
+  float: left;
+}
+
+.top6q image {
+  width: 57px;
+  height: 26px;
+  float: left;
+  margin-top: 3px;
+}
+
+.te1p {
+  width: 35%;
+  float: left;
+  margin-left: 15%;
+  text-align: right;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.te2p {
+  width: 35%;
+  float: left;
+  margin-left: 5%;
+  text-align: left;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.swiper-tab {
+  width: 60%;
+  text-align: center;
+  height: 60rpx;
+  line-height: 60rpx;
+  display: flex;
+  justify-content: center;
+  margin-left: 20%;
+}
+
+.swiper-tab-item {
+  width: 100%;
+  color: #000;
+}
+
+.active {
+  color: #000;
+  border-bottom: 5rpx solid #ffe604;
+}
+
+.juzhong {
+  margin: 0 auto;
+}
+
+.domain {
+  background-color: #f7f7f7;
+  height: 100%;
+  margin: 0 10px;
+}
+
+/**
+.show {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #f7f7f7;
+  float: left;
+  margin-bottom: 5%;
+}**/
+
+.hidden {
+  display: none;
+}
+
+.pal_card {
+  width: 90%;
+  background: #fff;
+  border-left: 4px solid #F0D542;
+  float: left;
+  flex-direction: column;
+  margin-left: 5%;
+  margin-top: 3%;
+  border-radius: 0px 15px 15px 0px;
+  flex-wrap: wrap;
+}
+
+.giver {
+  float: left;
+  margin-top: 6%;
+}
+
+.giver image {
+  width: 100rpx;
+  height: 100rpx;
+  float: left;
+  margin-left: 28rpx;
+  margin-right: 12px;
+    border-radius: 100rpx;
+}
+
+.basinf {
+  display: flex;
+  flex-direction: column;
+}
+
+.taskbrief {
+  float: left;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+  margin-top: 5%;
+  margin-bottom: 2px;
+}
+
+.tasktag {
+  float: left;
+  font-size: 11px;
+  color: #000;
+}
+
+.tasktag text {
+  background: #000;
+  color: #fff;
+  float: left;
+  margin-right: 2px;
+  padding: 2px 3px;
+  border-radius: 4px;
+  display: inherit;
+}
+
+.taskmate {
+  float: left;
+  font-size: 12px;
+  color: #333333;
+}
+
+.taskmate text {
+  margin-left: 0px;
+  margin-right: 19px;
+  margin-top: 3px;
+  float: left;
+}
+
+.taskdue {
+  float: left;
+  width: 90%;
+  border-bottom: 1px solid #f3f3f3;
+  font-size: 14px;
+  margin-left: 5%;
+  color: #000;
+  line-height: 32px;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.taskdrawer {
+  width: 90%;
+  float: left;
+  margin-top: 8px;
+  margin-left: 5%;
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: #000;
+}
+
+.topr1q1q {
+  float: left;
+  margin-top: 3%;
+}
+
+.topr1q1q image {
+  width: 90rpx;
+  height: 90rpx;
+  float: left;
+  margin-left: 28rpx;
+  margin-right: 10px;
+}
+
+.topr1q2q {
+  float: left;
+  font-size: 14px;
+  color: #000;
+  margin-top: 3%;
+  margin-bottom: 2px;
+}
+
+.topr1q3q {
+  float: left;
+  font-size: 12px;
+  color: #000;
+}
+
+.yige {
+  float: left;
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+.tab {
+  width: 100%;
+  float: left;
+  position: fixed;
+  bottom: 0px;
+  height: 56px;
+  line-height: 56px;
+  background: #fff;
+  border-top: 1px solid #f3f3f3;
+}
+
+.tab1q {
+  width: 33%;
+  float: left;
+  text-align: center;
+  
+}
+
+.tab2q {
+  width: 33%;
+  float: left;
+  text-align: center;
+}
+
+.tab2q {
+  width: 33%;
+  float: left;
+  text-align: center;
+}
+
+.tab2q image {
+  width: 38px;
+  height: 35px;
+  margin-top: 10px;
+}
+
+.tab1q1q {
+  border-bottom: 4px solid #ffe604;
+  width: 100%;
+}
+
+.haodu {
+  height: 56px;
+  width: 100%;
+  float: left;
+}
+
+.text {
+  width: 100%;
+  position: relative;
+  height: 100rpx;
+  line-height: 100rpx;
+  border: 1px solid #ccc;
+}
