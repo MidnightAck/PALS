@@ -33,8 +33,8 @@
             <text>{{item.name}}</text>
           </view>
           <view class='taskmate'>
-            <text>所需人数:{{item.school}}人</text>
-            <text class="cuIcon-profile text-black">参与候选人：{{item.major}}人</text>
+            <text>学院:{{item.school}}</text>
+            <text class="cuIcon-profile text-black">专业：{{item.major}}</text>
           </view>
         </view>
         

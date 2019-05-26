@@ -24,6 +24,7 @@ Page({
     pageSize: 20,
     sinput: '',
     candiopenid:'',
+    /////////////////////记录发起任务者//////////////
     stuinf: {
       openid: '', //_id
       id: '', //学号
@@ -31,12 +32,13 @@ Page({
       number: '', //联系方式
       school: '', //学院
       major: '', //专业
-      tag: [''], //标签
+      tag: [], //标签
       detail: '', //个人简介
       starnum: 0, //收藏数
       starlist: [], //收藏任务号
       userInfo: {} //用户信息
     },
+    //////////////////为了和stuinf区别开，starman是当前用户/////////
     starman: {
       openid: '', //_id
       id: '', //学号
@@ -44,7 +46,7 @@ Page({
       number: '', //联系方式
       school: '', //学院
       major: '', //专业
-      tag: [''], //标签
+      tag: [], //标签
       detail: '', //个人简介
       starnum: 0, //收藏数
       starlist: [], //收藏任务号
