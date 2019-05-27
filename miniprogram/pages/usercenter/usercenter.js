@@ -90,6 +90,7 @@ Page({
   索引：Giverid or Reciverid
   ------------------------*/
   onShow: function() {
+    console.log(app.globalData.userInfo)
     var that = this
    
     this.setData({

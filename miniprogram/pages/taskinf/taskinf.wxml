@@ -26,7 +26,7 @@
 
       <view bindtap="showModal" data-target="viewModal" wx:for="{{userlist}}" wx:for-index="index" data-index="{{index}}" wx:key="number" class='pal_card'>
         <view class='giver'>
-          <image src="{{item.avotor}}"></image>
+          <image src="{{item.userInfo.avatarUrl}}"></image>
         </view>
         <view class='basinf'>
           <view class='taskbrief'>
