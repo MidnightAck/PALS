@@ -559,9 +559,7 @@ Page({
                     success: res => {
                       console.log('删除成功：', res)
                       if (res.result.stats.removed == 1) {
-                        wx.showToast({
-                          title: '删除formId成功',
-                        })
+                       
                       }
                     },
                     fail: err => {

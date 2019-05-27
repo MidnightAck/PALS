@@ -27,6 +27,7 @@ Page({
       _id: '',
       briefInf: '',
       category: '',
+      reciInf:[],
       length: 0
     }],
   },
