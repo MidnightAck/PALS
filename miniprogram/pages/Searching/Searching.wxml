@@ -1,20 +1,106 @@
 <!--index.wxml-->
-<import src="/wxSearch/wxSearch.wxml"/>
+<view>
+  <scroll-view scroll-y class="DrawerPage {{modalName=='viewModal'?'show':''}}" style="height: 93.5%">
 
-<view class= page>
-<view class="wxSearch-section">
-  <view class="wxSearch-pancel">
-    <input bindinput="wxSearchInput" bindfocus="wxSerchFocus" value="{{wxSearchData.value}}" bindblur="wxSearchBlur" class="wxSearch-input" placeholder="组个队吧" />
-    <button class="wxSearch-button" bindtap="wxSearchFn" size="mini" plain="true">找队</button>
+    <import src="/wxSearch/wxSearch.wxml" />
+
+    <view class="page">
+      <view class="wxSearch-section">
+        <view class="wxSearch-pancel">
+          <input bindinput="wxSearchInput" bindfocus="wxSerchFocus" value="{{wxSearchData.value}}" bindblur="wxSearchBlur" class="wxSearch-input" placeholder="组个队吧" />
+          <button class="wxSearch-button" bindtap="wxSearchFn" size="mini" plain="true">找队</button>
+
+        </view>
+        <template is="wxSearch" data="{{wxSearchData}}" />
+        <view bindtap="showModal" data-target="viewModal" wx:for="{{taskOngoing}}" wx:for-index="index" data-index="{{index}}" wx:key="number" class='pal_card'>
+          <view class='giver'>
+            <image src="{{item.avotor}}"></image>
+          </view>
+          <view class='basinf'>
+            <view class='taskbrief'>
+              <text>{{item.briefInf}}</text>
+            </view>
+            <view class='star'>
+              <image bindtap="star" src='../../images/star.png'></image>
+            </view>
+            <view class='tasktag'>
+              <text>{{category[item.category]}}</text>
+            </view>
+            <view class='taskmate'>
+              <text>所需人数:{{item.teammate}}人</text>
+              <text class="cuIcon-profile text-black">参与候选人：{{item.Reciverid.length}}人</text>
+            </view>
+          </view>
+          <view class='taskdue'>
+            <text>候选截止日期：{{item.dateInf}}</text>
+          </view>
+          <view class="taskdrawer">
+            任务详情
+          </view>
+        </view>
+
+      </view>
+    </view>
+
+  </scroll-view>
+  <tabbar tabbar="{{tabbar}}"></tabbar>
+</view>
+
+<view class="DrawerClose {{modalName=='viewModal'?'show':''}}" bindtap="hideModal">
+  <text class="cuIcon-pullright"></text>
+</view>
+
+
+<scroll-view scroll-y class="DrawerWindow {{modalName=='viewModal'?'show':''}}">
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+
+    <view class="cu-timeline">
+      <view class="cu-time">06-17</view>
+      <view class="cu-item">
+        <view class="content">
+          <view class="cu-capsule radius">
+            <view class="cu-tag bg-cyan">上午</view>
+            <view class="cu-tag line-cyan">10:00</view>
+          </view>
+          <view class="margin-top">{{taskOngoing[modalIndex].detailsInf}}</view>
+        </view>
+      </view>
+    </view>
+
+
+
+
+
+    <view class="cu-timeline">
+      <view class="cu-time">任务详情</view>
+      <view class="cu-item cur cuIcon-noticefill">
+        <view class="bg-orange content shadow-blur">
+          <text>发起人姓名：</text>
+          <text>{{stuinf.name}}</text>
+        </view>
+        <view class="bg-yellow content shadow-blur">
+          <text>学院：</text>
+          <text>{{stuinf.school}}</text>
+        </view>
+        <view class="bg-blue content shadow-blur">
+          <text>专业：</text>
+          <text>{{stuinf.major}}</text>
+        </view>
+        <view class="bg-olive content shadow-blur">
+          <text>标签：</text>
+          <view class="padding-sm flex flex-wrap">
+            <view class="padding-xs" data-index='{{index}}' wx:for="{{stuinf.tag}}" wx:key>
+              <view class="cu-tag radius line-white">{{item}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <form report-submit="true" bindsubmit="button_three">
+      <button class="raise" position="fixed" formType="submit" ontap="joinTeam" disabled="{{disabled}}">加入</button>
+    </form>
+
   </view>
-
-
-  <i-card bindtap="detailedInf" wx:for="{{taskOngoing}}" wx:for-index="index" data-index="{{index}}"wx:key="number" title="{{category[item.category]}}" extra="{{item.dateInf}}"thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
-  <view slot="content">{{item.briefInf}}</view>
-  <view slot="footer">{{item.teammate}}人</view>
-</i-card>
-</view>
-<template is="wxSearch" data="{{wxSearchData}}"/>
-
-
-</view>
+</scroll-view>

@@ -17,7 +17,20 @@ Page({
       _id: '',
       briefInf: '',
       category: '',
-      length: 0
+      length: 0,
+      checkboxItems: [{
+        name: '禁止发布在广场中（仅发起者和被转发者可见）',
+        value: '0'
+      },
+      {
+        name: '指定标签可见',
+        value: '1'
+      },
+      {
+        name: '要求候选人填写说明',
+        value: '2'
+      }
+      ],
     }],
     totalCount: 0,
     tags: [],
@@ -164,7 +177,6 @@ Page({
 
   ///////////////////////////显示数据库内容/////////////
   onShow: function() {
-    console.log("hi")
     this.setData({
       stuID:app.globalData.stuId
     })
@@ -180,6 +192,7 @@ Page({
 
     //console.log(taskOngoing.stuId)
     db.collection('taskOngoing')
+
       .get({
         success: res => {
           let taskOngoing = res.data;

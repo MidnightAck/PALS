@@ -36,7 +36,8 @@ Page({
     //time: "12:01"
     countries: ["比赛", "项目", "拼车", "其他"],
     countryIndex: 0,
-    isAgree: false
+    isAgree: false,
+   
   },
   onShow: function () {
     if (app.globalData.stuId == '')
@@ -121,8 +122,9 @@ Page({
         }
       }
     }
+  
     this.setData({
-      checkboxItems: checkboxItems
+      checkboxItems: checkboxItems,
     });
   },
   ////////////////////////添加formid///////////////////////
@@ -184,7 +186,8 @@ Page({
         dateInf: that.data.date, //日期
         teammate: that.data.value, //队友人数
         checkboxItems: that.data.checkboxItems ,//高级设置
-        avotor: app.globalData.userInfo.avatarUrl//发起者头像
+        avotor: app.globalData.userInfo.avatarUrl,//发起者头像,
+      
       },
       success(res) {
         wx.hideToast();
