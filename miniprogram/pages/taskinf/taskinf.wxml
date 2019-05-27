@@ -9,16 +9,16 @@
       <view class="cu-timeline">
         <view class="cu-time">任务详情</view>
         <view class="cu-item cur cuIcon-noticefill">
-          <view class="content bg-red shadow-blur">
+          <view class="content bg-olive shadow-blur">
             <text>队伍简述：</text> {{taskOngoing.briefInf}}
           </view>
-          <view class="content bg-orange shadow-blur">
+          <view class="content bg-olive shadow-blur">
             <text>候选人名单：</text>{{taskOngoing.Reciverid}}
           </view>
           <view class="bg-olive content shadow-blur">
             <text>开始时间：</text> {{taskOngoing.dateInf}}
           </view>
-          <view class="bg-cyan content shadow-blur">
+          <view class="bg-olive content shadow-blur">
             <text>队伍详情：</text>{{taskOngoing.detailsInf}}
           </view>
         </view>

@@ -3,21 +3,17 @@
   "pages": [
     "pages/Square/Square",
     "pages/usercenter/usercenter",
-
     "pages/raise/raise",
-    "pages/message/message",
     "pages/userinf/userinf",
     "pages/taskinf/taskinf",
     "pages/taskinf_change/taskinf_change",
     "pages/details/details",
     "pages/Searching/Searching",
-    "pages/candidate/candidate",
-
     "pages/rec/rec",
     "pages/userfile/userfile",
-    "pages/candiinf/candiinf",
     "pages/star/star",
-    "pages/taskdone/taskdone"
+    "pages/taskdone/taskdone",
+    "pages/about/about"
   ],
   "tabBar": {
     "backgroundColor": "#ffffff",

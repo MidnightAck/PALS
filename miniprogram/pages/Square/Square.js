@@ -63,6 +63,18 @@ Page({
   },
 
   onLoad: function() {
+    wx.cloud.callFunction({
+      name: 'login1',
+      data: {},
+      success: res => {
+        console.log('[云函数] [login1] user openid: ', res.result.openid)
+        wx.setStorageSync("openid", res.result.openid)
+      },
+      fail: err => {
+        console.error('[云函数] [login1] 调用失败', err)
+      }
+    })
+
     console.log('onLoad')
     app.editTabbar();
     var that = this
@@ -106,7 +118,6 @@ Page({
         }
       }
     })
-
 
 
   },
@@ -171,14 +182,14 @@ Page({
   onShow: function() {
     console.log("Square onShow")
     this.setData({
-      stuID: app.globalData.stuId
+      stuID: wx.getStorageSync("openid")
     })
     var that = this
-    console.log("用户openid:" + app.globalData.openid)
+    console.log("用户openid:" + wx.getStorageSync("openid"))
     console.log("用户学号:" + app.globalData.stuId)
     const db = wx.cloud.database();
     db.collection('userAll').where({
-      openid: app.globalData.openid
+      openid: wx.getStorageSync("openid")
     }).get({
       success: res => {
         console.log(res.data)
@@ -382,7 +393,7 @@ Page({
       })
       /////////////////////////收藏//////////////
       db.collection('userAll').where({
-        openid: app.globalData.openid
+        openid: wx.getStorageSync("openid")
       }).get({
         success: res => {
           console.log(res.data)
@@ -472,7 +483,7 @@ Page({
     console.log(newid)
     var taskid = this.data.taskOngoing[this.data.modalIndex]._id;
 
-    if (this.data.reciIInf) {
+    if (this.data.reciIInf || this.data.taskOngoing[this.data.modalIndex].category==2) {
       wx.showModal({
         title: '',
         content: '确认加入队伍吗',
@@ -541,7 +552,7 @@ Page({
               wx.cloud.callFunction({
                 name: 'moban',
                 data: {
-                  openid: formIdList[0].openid,
+                  openid: formIdList[0]._openid,
                   template_id: "tckUPjs60Zy94Ixg9ZBiqPgfhQn24_ZdV0b-WoOKFdY",
                   // page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
                   form_id: formIdList[0].formId,
@@ -574,11 +585,20 @@ Page({
               })
             })
             wx.showModal({
-              title: '申请成功',
-              content: '我们已经告诉发起人啦',
+              title: '加入成功！',
+              content: '去我的候选看看',
               showCancel: false,
-              confirmText: '确认'
+              confirmText: '去看看',
+              success: res => {
+                if(res.confirm){
+                  wx.switchTab({
+                    url: '../usercenter/usercenter'
+                  })
+                }
+              }
+
             })
+           
           } else {
             console.log('用户手抖了')
           }

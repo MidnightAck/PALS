@@ -1,0 +1,12 @@
+
+<view class='margin-xl bg-white padding-xl radius shadow-lg'>
+  <view class='text-center margin-bottom text-lg  text-grey'>关于PALS</view>
+  <view class='text-content'>
+    <view>Hi！欢迎使用PALS！</view>
+    <view class='margin-top-sm'>这是一款组队小程序。不管是组队参加比赛，还是滴滴拼车，或是拼队友一起打狼人，都可以使用我们这款小程序。</view>
+   <view class='margin-top-sm'>我们是同济大学的大二学生，两个计算机代码狗（划掉）和一个设计专业的朋友。希望使用的朋友可以在这里轻松的找到自己的pals(੭ु≧▽≦)੭ु</view>
+    <view class='margin-top-sm'>项目目前还在开发，如果你有什么建议欢迎联系我们٩(๑❛ᴗ❛๑)۶</view>
+    <view class='margin-top-sm'>wendaoliu40@outlook.com</view>
+    <view class='margin-top-sm'>更多功能敬请期待！</view>
+  </view>
+</view>

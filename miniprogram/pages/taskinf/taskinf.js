@@ -280,7 +280,7 @@ Page({
       wx.cloud.callFunction({
         name: 'moban',
         data: {
-          openid: formIdList[0].openid,
+          openid: formIdList[0]._openid,
           template_id: "tckUPjs60Zy94Ixg9ZBiqPgfhQn24_ZdV0b-WoOKFdY",
           // page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
           form_id: formIdList[0].formId,
@@ -354,7 +354,7 @@ Page({
       wx.cloud.callFunction({
         name: 'moban',
         data: {
-          openid: formIdList[0].openid,
+          openid: formIdList[0]._openid,
           template_id: "tckUPjs60Zy94Ixg9ZBiqPgfhQn24_ZdV0b-WoOKFdY",
           // page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
           form_id: formIdList[0].formId,
@@ -461,6 +461,7 @@ Page({
           }).get().then(res => {
             console.log(res.data)
             var formIdList = res.data
+            console.log(formIdList)
             let date = new Date();
             let data = JSON.stringify({
               "keyword1": {
@@ -474,7 +475,7 @@ Page({
             wx.cloud.callFunction({
               name: 'moban',
               data: {
-                openid: formIdList[0].openid,
+                openid: formIdList[0]._openid,
                 template_id: "tckUPjs60Zy94Ixg9ZBiqPgfhQn24_ZdV0b-WoOKFdY",
                 // page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
                 form_id: formIdList[0].formId,

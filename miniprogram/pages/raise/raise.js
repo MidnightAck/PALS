@@ -3,6 +3,7 @@ const db = wx.cloud.database();
 const _ = db.command;
 Page({
   data: {
+    showcat:'比赛',
     reciInf: [],
     value: 1,
     brief: '',
@@ -100,8 +101,18 @@ Page({
   ------------------------*/
   bindCountryChange: function (e) {
     console.log('picker country 发生选择改变，携带值为', e.detail.value);
+    
+    var stand=''
+    switch(e.detail.value){
+      case ('2'): stand = '拼车'; break;
+      case ('0'): stand = '比赛'; break;
+      case ('1'): stand = '项目'; break;
+      case ('3'): stand = '其他'; break;
+      default: break;
+    }
     this.setData({
-      countryIndex: e.detail.value
+      countryIndex: e.detail.value,
+      showcat:stand
     })
   },
   /*------------------------

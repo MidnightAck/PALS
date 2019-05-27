@@ -12,6 +12,7 @@
 
         </view>
         <template is="wxSearch" data="{{wxSearchData}}" />
+        <view>
         <view bindtap="showModal" data-target="viewModal" wx:for="{{taskOngoing}}" wx:for-index="index" data-index="{{index}}" wx:key="number" class='pal_card'>
           <view class='giver'>
             <image src="{{item.avotor}}"></image>
@@ -42,7 +43,7 @@
             任务详情
           </view>
         </view>
-
+</view>
       </view>
     </view>
 
@@ -105,7 +106,7 @@
             </view>
           </view>
         </view>
-        <view class="bg-cyan content shadow-blur">
+        <view  wx:if="{{taskOngoing[modalIndex].category!=2}}" class="bg-cyan content shadow-blur">
           <textarea maxlength='100' placeholder='填写对自己的介绍' bindinput='reciInf'></textarea>
         </view>
       </view>

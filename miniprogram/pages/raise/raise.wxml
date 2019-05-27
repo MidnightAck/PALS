@@ -17,7 +17,7 @@
   <!--活动内容  -->
   <view class='the_content_view'>
     <view class='the_content_title_view'>
-      <image src='../../images/icon/faqititle.png'></image>
+      <image src='../../images/icon/shangchengorder.png'></image>
       <text>个人简介</text>
     </view>
     <view class='the_content_content'>
@@ -45,8 +45,8 @@
     <image src='../../images/icon/allactivict.png'></image>
     <text>活动类别</text>
     <view class='address'>
-      <picker class='gerenxinxi_view_touxiang_images_sr' bindchange="bindCountryChange" value="{{countryIndex}}" range="{{countries}}">
-        <text>{{countryIndex}}</text>
+      <picker class='gerenxinxi_view_touxiang_images_sr' bindchange="bindCountryChange" value="{{showcat}}" range="{{countries}}">
+        <text>{{showcat}}</text>
         <image src='../../images/icon/nextbm.png'></image>
       </picker>
     </view>
