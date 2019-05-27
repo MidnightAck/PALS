@@ -90,6 +90,28 @@ Page({
   索引：Giverid or Reciverid
   ------------------------*/
   onShow: function() {
+    if (app.globalData.stuId == '')
+      wx.showModal({
+        title: '不能发起',
+        content: '请先进行校友认证',
+        showCancel: true,
+        confirmText: '去认证',
+        cancelText: '再看看',
+        success: function (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../userinf/userinf'
+            })
+          }
+          else if (res.cancel) {
+            wx.switchTab({
+              url: '../Square/Square'
+            })
+          }
+        },
+      })
+
+
     console.log(app.globalData.userInfo)
     var that = this
    

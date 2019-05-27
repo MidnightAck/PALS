@@ -15,7 +15,9 @@ Page({
       _id: '',
       briefInf: '',
       category: '',
-      length: 0
+      detailsInf:'',
+      length: 0,
+      giverInf:''
     }],
     totalCount: 0,
     tags: [],
@@ -137,6 +139,7 @@ Page({
           regexp: this.data.sinput,
           options: 's',
         })
+
       })
       .get({
         success: res => {

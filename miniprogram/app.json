@@ -3,7 +3,7 @@
   "pages": [
     "pages/Square/Square",
     "pages/usercenter/usercenter",
-    "pages/Test/Test",
+
     "pages/raise/raise",
     "pages/message/message",
     "pages/userinf/userinf",
@@ -12,7 +12,7 @@
     "pages/details/details",
     "pages/Searching/Searching",
     "pages/candidate/candidate",
-    "pages/formid/formid",
+
     "pages/rec/rec",
     "pages/userfile/userfile",
     "pages/candiinf/candiinf",

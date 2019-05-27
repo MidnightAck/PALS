@@ -18,25 +18,15 @@ Page({
       briefInf: '',
       category: '',
       length: 0,
-      checkboxItems: [{
-        name: '禁止发布在广场中（仅发起者和被转发者可见）',
-        value: '0'
-      },
-      {
-        name: '指定标签可见',
-        value: '1'
-      },
-      {
-        name: '要求候选人填写说明',
-        value: '2'
-      }
-      ],
+      giverInf:'',
+      reciInf:[]
     }],
     totalCount: 0,
     tags: [],
     pageSize: 20,
     sinput: '',
-    candiopenid:'',
+    reciIInf:'',
+    candiopenid: '',
     /////////////////////记录发起任务者//////////////
     stuinf: {
       openid: '', //_id
@@ -65,8 +55,9 @@ Page({
       starlist: [], //收藏任务号
       userInfo: {} //用户信息
     },
-    disabled:false,
+    disabled: false,
     star_disabled: false,
+    star_choosing: false,
     index: 0,
     stuID: ''
   },
@@ -115,7 +106,8 @@ Page({
         }
       }
     })
-     
+
+
 
   },
   ///////////////////////////搜索框相关///////////////////////////////////
@@ -177,35 +169,65 @@ Page({
 
   ///////////////////////////显示数据库内容/////////////
   onShow: function() {
+    console.log("Square onShow")
     this.setData({
-      stuID:app.globalData.stuId
+      stuID: app.globalData.stuId
     })
     var that = this
-    console.log(app.globalData.openid)
-    console.log(app.globalData.stuId)
+    console.log("用户openid:" + app.globalData.openid)
+    console.log("用户学号:" + app.globalData.stuId)
     const db = wx.cloud.database();
-    db.collection('taskOngoing').count({
-      success: function(res) {
-        that.data.totalCount = res.total;
+    db.collection('userAll').where({
+      openid: app.globalData.openid
+    }).get({
+      success: res => {
+        console.log(res.data)
+        console.log("用户个人信息获取完毕")
+        if (res.data)
+          this.setData({
+            starman: res.data[0]
+          })
+        db.collection('taskOngoing').count({
+          success: function(res) {
+            that.data.totalCount = res.total;
+          }
+        })
+
+        //console.log(taskOngoing.stuId)
+        db.collection('taskOngoing')
+          .get({
+            success: res => {
+              let taskOngoing = res.data;
+              if (taskOngoing) {
+                //console.log(this.data.starman.starlist)
+                //console.log(res.data)
+                for (var i = 0; i < taskOngoing.length; i++) {
+                  //console.log(taskOngoing[i]._id)
+                  if (this.data.starman.starlist.indexOf(taskOngoing[i]._id) != -1) {
+                    taskOngoing[i].stared = true //如果收藏了则显示星星
+
+                  } else {
+                    taskOngoing[i].stared = false //没有收藏
+
+                  }
+                }
+                this.setData({
+                  taskOngoing: taskOngoing
+                })
+                //console.log(this.data.taskOngoing)
+              }
+            },
+            fail(res) {
+              console.log(fail)
+            }
+          })
+      },
+      fail(res) {
+        console.log(fail)
       }
     })
 
-    //console.log(taskOngoing.stuId)
-    db.collection('taskOngoing')
 
-      .get({
-        success: res => {
-          let taskOngoing = res.data;
-          if (taskOngoing) {
-            this.setData({
-              taskOngoing: taskOngoing
-            })
-          }
-        },
-        fail(res) {
-          console.log(fail)
-        }
-      })
   },
 
   /////////////////////////////////获取后续内容//////////////////////
@@ -237,6 +259,17 @@ Page({
                 totaltaskOngoing = that.data.taskOngoing.concat(temp);
 
                 console.log(totaltaskOngoing);
+                for (var i = 0; i < totaltaskOngoing.length; i++) {
+                  //console.log(taskOngoing[i]._id)
+                  if (this.data.starman.starlist.indexOf(totaltaskOngoing[i]._id) != -1) {
+                    totaltaskOngoing[i].stared = true //如果收藏了则显示星星
+
+                  } else {
+                    totaltaskOngoing[i].stared = false //没有收藏
+
+                  }
+                }
+       
                 that.setData({
                   taskOngoing: totaltaskOngoing,
                 })
@@ -261,69 +294,132 @@ Page({
 
   },
 
-  showModal:function(e) {
-    this.setData({
-      modalName: e.currentTarget.dataset.target,
-      modalIndex: e.currentTarget.dataset.index
-    })
-    console.log("触发任务名:" + this.data.taskOngoing[this.data.modalIndex].briefInf)
-    console.log("触发任务名:" + this.data.taskOngoing[this.data.modalIndex]._openid)
-    db.collection('userAll').where({
-      openid: this.data.taskOngoing[this.data.modalIndex]._openid
-    }).get({
-      success: res => {
-        console.log(res.data)
+  showModal: function(e) {
+    if (this.data.star_choosing) { //点击了收藏 禁止动画
+      if (!this.data.star_cancel) {
         this.setData({
-          stuinf: res.data[0]
+          star_index: e.currentTarget.dataset.index
         })
-      },
-      fail(res) {
-        console.log(fail)
-      }
-    })
-/////////////////////////收藏//////////////
-    db.collection('userAll').where({
-      openid: app.globalData.openid
-    }).get({
-      success: res => {
-        console.log(res.data)
-        if (res.data)
-          this.setData({
-            starman: res.data[0]
-          })
-        if (this.data.starman.starlist.indexOf(this.data.taskOngoing[this.data.modalIndex]._id) != -1 || app.globalData.stuId == '') {
-          this.setData({
-            star_disabled: true
-          })
+        var taskOngoing = this.data.taskOngoing
+        taskOngoing[this.data.star_index].stared = true
+        this.setData({
+          taskOngoing: taskOngoing
+        })
+        db.collection('userAll').doc(this.data.starman._id).update({
+          data: {
+            starlist: _.push(this.data.taskOngoing[this.data.star_index]._id),
+            starnum: this.data.stuinf.starnum + 1
+          },
+          success: res => {
+            wx.showToast({
+              title: '收藏成功',
+            })
+            this.setData({
+              star_choosing: false,
+              star_cancel: false
+            }) //恢复抽屉动态效果
+          },
+          fail: err => {
+            icon: 'none',
+            console.error('[数据库] [更新记录] 失败：', err)
+          }
+        })
+      } else { //取消收藏
+        this.setData({
+          star_index: e.currentTarget.dataset.index
+        })
+        var taskOngoing = this.data.taskOngoing
+        var starlist =[]
+        taskOngoing[this.data.star_index].stared = false
+        for (var i = 0; i < taskOngoing.length; i++) {
+          if (taskOngoing[i].stared)
+            starlist.push(taskOngoing[i]._id)
         }
-      },
-      fail(res) {
-        console.log(fail)
+        console.log("删除后starlist:"+starlist)
+        this.setData({
+          taskOngoing:taskOngoing
+        })
+        db.collection('userAll').doc(this.data.starman._id).update({
+          data: {
+            starlist: starlist,
+            starnum: this.data.starman.starnum - 1
+          },
+          success: res => {
+            wx.showToast({
+              title: '取消成功',
+            })
+            this.setData({
+              star_choosing: false,
+              star_cancel: false
+            }) //恢复抽屉动态效果
+          },
+          fail: err => {
+            icon: 'none',
+              console.error('[数据库] [更新记录] 失败：', err)
+          }
+        })
+
       }
-    })
-    console.log(this.data.taskOngoing[this.data.modalIndex])
-    ///////////////////////能否加入队伍///////////////////////
-    var newid = []
-    newid = this.data.taskOngoing[this.data.modalIndex].Reciverid
-    console.log(newid)
-    console.log(app.globalData.stuId)
-    if (newid.indexOf(app.globalData.stuId) != -1) {
+    } else {
       this.setData({
-        disabled: true
+        modalName: e.currentTarget.dataset.target,
+        modalIndex: e.currentTarget.dataset.index
       })
-    }
-    console.log(this.data.disabled)
-    db.collection('userAll').where({
-      id: this.data.taskOngoing[this.data.modalIndex].Giverid
-    })
-      .get({
+      console.log("触发任务名:" + this.data.taskOngoing[this.data.modalIndex].briefInf)
+      console.log("触发任务名:" + this.data.taskOngoing[this.data.modalIndex]._openid)
+      db.collection('userAll').where({
+        openid: this.data.taskOngoing[this.data.modalIndex]._openid
+      }).get({
         success: res => {
           console.log(res.data)
           this.setData({
-            candiopenid: res.data
+            stuinf: res.data[0]
           })
+        },
+        fail(res) {
+          console.log(fail)
         }
       })
+      /////////////////////////收藏//////////////
+      db.collection('userAll').where({
+        openid: app.globalData.openid
+      }).get({
+        success: res => {
+          console.log(res.data)
+          if (res.data)
+            this.setData({
+              starman: res.data[0]
+            })
+        },
+        fail(res) {
+          console.log(fail)
+        }
+      })
+      console.log(this.data.taskOngoing[this.data.modalIndex])
+      ///////////////////////能否加入队伍///////////////////////
+      var newid = []
+      newid = this.data.taskOngoing[this.data.modalIndex].Reciverid
+      console.log(newid)
+      console.log(app.globalData.stuId)
+      if (newid.indexOf(app.globalData.stuId) != -1) {
+        this.setData({
+          disabled: true
+        })
+      }
+      console.log(this.data.disabled)
+      db.collection('userAll').where({
+          id: this.data.taskOngoing[this.data.modalIndex].Giverid
+        })
+        .get({
+          success: res => {
+            console.log(res.data)
+            this.setData({
+              candiopenid: res.data
+            })
+          }
+        })
+
+    }
   },
   hideModal(e) {
     this.setData({
@@ -343,14 +439,14 @@ Page({
   button_three(e) {
     console.log(e.detail.formId)
     console.log(new Date())
-    if (e.detail.formId!=null) {
+    if (e.detail.formId != null) {
       db.collection('formId').add({
-        data: {
-          openid: wx.getStorageSync("openid"),
-          formId: e.detail.formId,
-          date: (new Date()).valueOf()
-        }
-      })
+          data: {
+            openid: wx.getStorageSync("openid"),
+            formId: e.detail.formId,
+            date: (new Date()).valueOf()
+          }
+        })
         .then(res => {
           console.log(res)
         })
@@ -358,7 +454,13 @@ Page({
   },
 
 
-  joinTeam: function (e) {
+  joinTeam: function(e) {
+    var reciInf = this.data.taskOngoing[this.data.modalIndex].reciInf
+    console.log(this.data.reciIInf)
+    
+
+    reciInf.push(this.data.reciIInf)
+    console.log(reciInf)
     this.button_three(e)
     console.log(this.data.candiopenid[0])
     var newid = []
@@ -369,132 +471,155 @@ Page({
     newid.push(app.globalData.stuId)
     console.log(newid)
     var taskid = this.data.taskOngoing[this.data.modalIndex]._id;
-    wx.showModal({
-      title: '',
-      content: '确认加入队伍吗',
-      confirmText: "那当然",
-      cancelText: "打扰了",
-      success: function (res) {
-        console.log(res)
-        if (res.confirm) {
-          /////////////////////////////////////
-          wx.cloud.callFunction({
-            name: 'join',
-            data: {
-              _id: taskid,
-              newid: newid
-            },
-            success: res => {
-              console.log('更新数据成功')
-            },
-            fail: res => {
-              console.log('mei成功')
-            }
-          })
-          ////////////////////////////////////
 
+    if (this.data.reciIInf) {
+      wx.showModal({
+        title: '',
+        content: '确认加入队伍吗',
+        confirmText: "那当然",
+        cancelText: "打扰了",
+        success: function (res) {
           db.collection('taskOngoing').doc(taskid).update({
             data: {
-              Reciverid: newid
+              reciInf: reciInf
             },
-            success: res => {
-              this.setData({
-                Reciverid: newid
-              })
-            },
-            fail: err => {
-              icon: 'none',
-                console.error('[数据库] [更新记录] 失败：', err)
-            }
           })
-
-          console.log(candiopenid)
-          let week = new Date() - (1000 * 60 * 60 * 24 * 7) //建立7天时间戳
-         
-          
-          //获取formId数据 
-          db.collection('formId').where({
-            _openid: candiopenid,
-            date: _.gt(week) //获取7天内
-          }).get().then(res => {
-            console.log(res.data)
-            var formIdList = res.data
-            let date = new Date();
-            let data = JSON.stringify({
-              "keyword1": {
-                "value": "已有人加入了你的队伍"
-              },
-              "keyword2": {
-                "value": date
-              }
-            })
-            //调用云函数发送模版消息
+          console.log(res)
+          if (res.confirm) {
+            /////////////////////////////////////
             wx.cloud.callFunction({
-              name: 'moban',
+              name: 'join',
               data: {
-                openid: formIdList[0].openid,
-                template_id: "tckUPjs60Zy94Ixg9ZBiqPgfhQn24_ZdV0b-WoOKFdY",
-                // page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
-                form_id: formIdList[0].formId,
-                data,
-                emphasis_keyword: "keyword1.DATA"
+                _id: taskid,
+                newid: newid
               },
               success: res => {
-                console.log('模版消息发送成功: ', res)
-                var id = formIdList[0]._id
-                wx.cloud.callFunction({
-                  name: 'remove',
-                  data: {
-                    id,
-                  },
-                  success: res => {
-                    console.log('删除成功：', res)
-                    if (res.result.stats.removed == 1) {
-                      wx.showToast({
-                        title: '删除formId成功',
-                      })
-                    }
-                  },
-                  fail: err => {
-                    console.log('删除失败：', err)
-                  }
-                })
-                
+                console.log('更新数据成功')
               },
-              fail: err => {
-                console.error('模版消息发送失败：', err)
+              fail: res => {
+                console.log('mei成功')
               }
             })
-          })
-          wx.showModal({
-            title: '申请成功',
-            content: '我们已经告诉发起人啦',
-            showCancel: false,
-            confirmText: '确认'
-          })
+            ////////////////////////////////////
+
+            db.collection('taskOngoing').doc(taskid).update({
+              data: {
+                Reciverid: newid
+              },
+              success: res => {
+                this.setData({
+                  Reciverid: newid
+                })
+              },
+              fail: err => {
+                icon: 'none',
+                  console.error('[数据库] [更新记录] 失败：', err)
+              }
+            })
+
+            console.log(candiopenid)
+            let week = new Date() - (1000 * 60 * 60 * 24 * 7) //建立7天时间戳
+
+
+            //获取formId数据 
+            db.collection('formId').where({
+              _openid: candiopenid,
+              date: _.gt(week) //获取7天内
+            }).get().then(res => {
+              console.log(res.data)
+              var formIdList = res.data
+              let date = new Date();
+              let data = JSON.stringify({
+                "keyword1": {
+                  "value": "已有人加入了你的队伍"
+                },
+                "keyword2": {
+                  "value": date
+                }
+              })
+              //调用云函数发送模版消息
+              wx.cloud.callFunction({
+                name: 'moban',
+                data: {
+                  openid: formIdList[0].openid,
+                  template_id: "tckUPjs60Zy94Ixg9ZBiqPgfhQn24_ZdV0b-WoOKFdY",
+                  // page: "/pages/fromID/index?sender_openid=" + wx.getStorageSync("openid") + "&value=" + value, //携带参数
+                  form_id: formIdList[0].formId,
+                  data,
+                  emphasis_keyword: "keyword1.DATA"
+                },
+                success: res => {
+                  console.log('模版消息发送成功: ', res)
+                  var id = formIdList[0]._id
+                  wx.cloud.callFunction({
+                    name: 'remove',
+                    data: {
+                      id,
+                    },
+                    success: res => {
+                      console.log('删除成功：', res)
+                      if (res.result.stats.removed == 1) {
+                        wx.showToast({
+                          title: '删除formId成功',
+                        })
+                      }
+                    },
+                    fail: err => {
+                      console.log('删除失败：', err)
+                    }
+                  })
+
+                },
+                fail: err => {
+                  console.error('模版消息发送失败：', err)
+                }
+              })
+            })
+            wx.showModal({
+              title: '申请成功',
+              content: '我们已经告诉发起人啦',
+              showCancel: false,
+              confirmText: '确认'
+            })
+          } else {
+            console.log('用户手抖了')
+          }
         }
-        else {
-          console.log('用户手抖了')
+      })
+    }
+    else {
+      wx.showModal({
+        title: '',
+        content: '请输入个人简介',
+        confirmText: "马上去",
+        success: function (res) {
+          if (res.confirm) {
+            return
+          }
         }
-      }
-    })
+      })
+    }
+   
   },
 
   ///////////////////////收藏队伍///////////////////////
-  star: function (e) {
-    console.log(e.currentTarget.dataset.target)
-    var that = this
-    console.log(app.globalData.openid)
-    console.log(this.data.starman.starlist)
+  star: function(e) {
     this.setData({
-      star_disabled: true
+      star_choosing: true,
+      star_cancel: false
     })
-    db.collection('userAll').doc(this.data.stuinf._id).update({
-      data: {
-        starlist: _.push(this.data.taskOngoing[this.data.modalIndex]._id),
-        starnum: this.data.stuinf.starnum + 1
-      }
+  },
+  unstar: function() {
+    this.setData({
+      star_choosing: true,
+      star_cancel: true
     })
 
+  },
+
+  reciInf: function (e) {
+    this.setData({
+      reciIInf: e.detail.value
+    })
   },
 })

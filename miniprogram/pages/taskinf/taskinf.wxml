@@ -70,6 +70,10 @@
           <text>专业：</text>
           <text>{{userlist[modalIndex].major}}</text>
         </view>
+         <view class="bg-cyan content shadow-blur">
+          <text>简介：</text>
+          <text>{{taskOngoing.reciInf[modalIndex]}}</text>
+        </view>
         <view class="bg-olive content shadow-blur">
           <text>标签：</text>
           <view class="padding-sm flex flex-wrap">

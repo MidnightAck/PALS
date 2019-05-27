@@ -1,7 +1,7 @@
 <!--个人中心-->
 <scroll-view scroll-y class="scrollPage">
   <view class="UCenter-bg">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 请先点击这里 </button>
     <block wx:else>
       <image src="{{userInfo.avatarUrl}}" class="userinfo-avatar" mode="cover"></image>
       <view class="text-xl">{{userInfo.nickName}}

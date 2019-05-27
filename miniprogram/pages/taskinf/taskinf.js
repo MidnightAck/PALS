@@ -15,7 +15,8 @@ Page({
       _id: '',
       briefInf: '',
       category: '',
-      taskid: ''
+      taskid: '',
+      reciInf:[]
     },
     candiopenid: [],
     stuinf: {

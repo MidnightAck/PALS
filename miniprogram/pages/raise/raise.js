@@ -3,9 +3,11 @@ const db = wx.cloud.database();
 const _ = db.command;
 Page({
   data: {
+    reciInf: [],
     value: 1,
     brief: '',
     details: '',
+    giverInf:'',
     checkboxItems: [{
       name: '禁止发布在广场中（仅发起者和被转发者可见）',
       value: '0'
@@ -69,6 +71,12 @@ Page({
   briefInf: function (e) {
     this.setData({
       brief: e.detail.value
+    })
+  },
+
+  giverInf: function (e) {
+    this.setData({
+      giverInf: e.detail.value
     })
   },
   /*------------------------
@@ -187,7 +195,8 @@ Page({
         teammate: that.data.value, //队友人数
         checkboxItems: that.data.checkboxItems ,//高级设置
         avotor: app.globalData.userInfo.avatarUrl,//发起者头像,
-      
+        giverInf: that.data.giverInf,
+        reciInf: []
       },
       success(res) {
         wx.hideToast();

@@ -20,9 +20,13 @@
             <view class='taskbrief'>
               <text>{{item.briefInf}}</text>
             </view>
-            <view class='star'>
-              <image bindtap="star" src='../../images/star.png'></image>
+            <view wx:if="{{item.stared}}"class='star'>
+              <image  bindtap="unstar" src='../../images/stared.png'></image>
             </view>
+             <view wx:else class='star'>
+              <image  bindtap="star" src='../../images/star.png'></image>
+            </view>
+
             <view class='tasktag'>
               <text>{{category[item.category]}}</text>
             </view>
@@ -55,14 +59,21 @@
   <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
 
     <view class="cu-timeline">
-      <view class="cu-time">06-17</view>
+      <view class="cu-time">任务详情</view>
       <view class="cu-item">
         <view class="content">
           <view class="cu-capsule radius">
-            <view class="cu-tag bg-cyan">上午</view>
-            <view class="cu-tag line-cyan">10:00</view>
+            <view class="cu-tag bg-cyan">任务</view>
+            <view class="cu-tag line-cyan">内容</view>
           </view>
           <view class="margin-top">{{taskOngoing[modalIndex].detailsInf}}</view>
+        </view>
+        <view class="content">
+          <view class="cu-capsule radius">
+            <view class="cu-tag bg-cyan">发起人</view>
+            <view class="cu-tag line-cyan">介绍</view>
+          </view>
+          <view class="margin-top">{{taskOngoing[modalIndex].giverInf}}</view>
         </view>
       </view>
     </view>
@@ -94,7 +105,11 @@
             </view>
           </view>
         </view>
+        <view class="bg-cyan content shadow-blur">
+          <textarea maxlength='100' placeholder='填写对自己的介绍' bindinput='reciInf'></textarea>
+        </view>
       </view>
+
     </view>
 
 
