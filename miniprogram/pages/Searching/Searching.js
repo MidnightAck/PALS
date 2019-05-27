@@ -15,19 +15,19 @@ Page({
       _id: '',
       briefInf: '',
       category: '',
-      detailsInf:'',
+      detailsInf: '',
       length: 0,
-      giverInf:''
+      giverInf: ''
     }],
     totalCount: 0,
     tags: [],
     pageSize: 20,
     sinput: ''
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
 
     console.log('onLoad')
-    this.data.sinput=options.sinput
+    this.data.sinput = options.sinput
     var that = this
     console.log(this.data.sinput)
     //初始化的时候渲染wxSearchdata
@@ -38,29 +38,41 @@ Page({
 
   ///////////////////////////搜索框相关///////////////////////////////////
   ///////////////////////////进行搜索/////////////////////////////////////
-  wxSearchFn: function (e) {
+  wxSearchFn: function(e) {
     console.log('Sfn')
     var that = this
     this.data.sinput = WxSearch.wxSearchAddHisKey(that);
-    
+
     var stand = this.data.sinput;
-    /*
-    switch (this.data.sinput) {
+    
+    switch (stand) {
       case ('拼车'): stand = '2'; break;
       case ('比赛'): stand = '0'; break;
       case ('项目'): stand = '1'; break;
       case ('其他'): stand = '3'; break;
       default: break;
     }
-    */
+    
     console.log(stand)
-    db.collection('taskOngoing').where({
+    db.collection('taskOngoing').where(_.or([{
       briefInf: db.RegExp({
-        regexp: stand,
+        regexp: this.data.sinput,
         options: 's',
       })
-
-    }).get({
+    },
+    {
+      detailsInf: db.RegExp({
+        regexp: this.data.sinput,
+        options: 's',
+      })
+    },
+    {
+      category: db.RegExp({
+        regexp: this.data.sinput,
+        options: 's',
+      })
+    }
+    ])).get({
       success: res => {
         console.log(res.data)
         let taskOngoing = res.data;
@@ -77,70 +89,103 @@ Page({
     })
   },
   ///////////////////////////搜索框输入/////////////////////////////////////
-  wxSearchInput: function (e) {
+  wxSearchInput: function(e) {
     console.log('Sinput')
     var that = this
     WxSearch.wxSearchInput(e, that).value
 
   },
-  wxSerchFocus: function (e) {
+  wxSerchFocus: function(e) {
     var that = this
     WxSearch.wxSearchFocus(e, that);
   },
-  wxSearchBlur: function (e) {
+  wxSearchBlur: function(e) {
     var that = this
     WxSearch.wxSearchBlur(e, that);
   },
-  wxSearchKeyTap: function (e) {
+  wxSearchKeyTap: function(e) {
     var that = this
     WxSearch.wxSearchKeyTap(e, that);
   },
-  wxSearchDeleteKey: function (e) {
+  wxSearchDeleteKey: function(e) {
     var that = this
     WxSearch.wxSearchDeleteKey(e, that);
   },
-  wxSearchDeleteAll: function (e) {
+  wxSearchDeleteAll: function(e) {
     var that = this;
     WxSearch.wxSearchDeleteAll(that);
   },
-  wxSearchTap: function (e) {
+  wxSearchTap: function(e) {
     var that = this
     WxSearch.wxSearchHiddenPancel(that);
   },
- 
+
 
 
   ///////////////////////////显示数据库内容/////////////
-  onShow: function () {
-    
-    
+  onShow: function() {
+
+
     var that = this
     console.log(this.data.sinput)
-    const db = wx.cloud.database();
+  
+
+    switch (this.data.sinput) {
+      case ('拼车'): this.data.sinput = '2'; break;
+      case ('比赛'): this.data.sinput = '0'; break;
+      case ('项目'): this.data.sinput = '1'; break;
+      case ('其他'): this.data.sinput = '3'; break;
+      default: break;
+    }
 
     db.collection('taskOngoing')
-    .where({
-      briefInf: db.RegExp({
-        regexp: this.data.sinput,
-        options: 's',
-      })
-    })
-    .count({
-      success: function (res) {
-        that.data.totalCount = res.total;
-        console.log(this.data.totalCount)
-      }
-    })
-
-    //console.log(taskOngoing.stuId)
-    db.collection('taskOngoing')
-      .where({
+      .where(_.or([{
         briefInf: db.RegExp({
           regexp: this.data.sinput,
           options: 's',
         })
-
+      },
+      {
+        detailsInf: db.RegExp({
+          regexp: this.data.sinput,
+          options: 's',
+        })
+      },
+      {
+        category: db.RegExp({
+          regexp: this.data.sinput,
+          options: 's',
+        })
+      }
+      ]))
+      .count({
+        success: function(res) {
+          that.data.totalCount = res.total;
+          console.log(this.data.totalCount)
+        }
       })
+
+    //console.log(taskOngoing.stuId)
+    db.collection('taskOngoing')
+      .where(_.or([{
+        briefInf: db.RegExp({
+          regexp: this.data.sinput,
+          options: 's',
+        })
+      },
+      {
+        detailsInf: db.RegExp({
+          regexp: this.data.sinput,
+          options: 's',
+        })
+      },
+      {
+        category: db.RegExp({
+          regexp: this.data.sinput,
+          options: 's',
+        })
+      }
+      ]))
       .get({
         success: res => {
           let taskOngoing = res.data;
@@ -162,7 +207,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     var that = this;
     var temp = [];
     // 获取后面二十条
@@ -172,14 +217,27 @@ Page({
         db.collection('taskOngoing')
           .skip(20)
           .limit(that.data.pageSize)
-          .where({
+          .where(_.or([{
             briefInf: db.RegExp({
               regexp: this.data.sinput,
               options: 's',
             })
-          })
+          },
+          {
+            detailsInf: db.RegExp({
+              regexp: this.data.sinput,
+              options: 's',
+            })
+          },
+            {
+              category: db.RegExp({
+                regexp: this.data.sinput,
+                options: 's',
+              })
+            }
+          ]))
           .get({
-            success: function (res) {
+            success: function(res) {
 
 
               if (res.data.length > 0) {
@@ -202,7 +260,7 @@ Page({
                 })
               }
             },
-            fail: function (event) {
+            fail: function(event) {
               console.log("======" + event);
             }
           })
@@ -217,7 +275,7 @@ Page({
 
   },
 
-  showModal: function (e) {
+  showModal: function(e) {
     this.setData({
       modalName: e.currentTarget.dataset.target,
       modalIndex: e.currentTarget.dataset.index
@@ -270,8 +328,8 @@ Page({
     }
     console.log(this.data.disabled)
     db.collection('userAll').where({
-      id: this.data.taskOngoing[this.data.modalIndex].Giverid
-    })
+        id: this.data.taskOngoing[this.data.modalIndex].Giverid
+      })
       .get({
         success: res => {
           console.log(res.data)
@@ -301,12 +359,12 @@ Page({
     console.log(new Date())
     if (e.detail.formId != null) {
       db.collection('formId').add({
-        data: {
-          openid: wx.getStorageSync("openid"),
-          formId: e.detail.formId,
-          date: (new Date()).valueOf()
-        }
-      })
+          data: {
+            openid: wx.getStorageSync("openid"),
+            formId: e.detail.formId,
+            date: (new Date()).valueOf()
+          }
+        })
         .then(res => {
           console.log(res)
         })
@@ -314,7 +372,7 @@ Page({
   },
 
 
-  joinTeam: function (e) {
+  joinTeam: function(e) {
     this.button_three(e)
     console.log(this.data.candiopenid[0])
     var newid = []
@@ -330,7 +388,7 @@ Page({
       content: '确认加入队伍吗',
       confirmText: "那当然",
       cancelText: "打扰了",
-      success: function (res) {
+      success: function(res) {
         console.log(res)
         if (res.confirm) {
           /////////////////////////////////////
@@ -360,7 +418,7 @@ Page({
             },
             fail: err => {
               icon: 'none',
-                console.error('[数据库] [更新记录] 失败：', err)
+              console.error('[数据库] [更新记录] 失败：', err)
             }
           })
 
@@ -428,8 +486,7 @@ Page({
             showCancel: false,
             confirmText: '确认'
           })
-        }
-        else {
+        } else {
           console.log('用户手抖了')
         }
       }
@@ -437,7 +494,7 @@ Page({
   },
 
   ///////////////////////收藏队伍///////////////////////
-  star: function (e) {
+  star: function(e) {
     console.log(e.currentTarget.dataset.target)
     var that = this
     console.log(app.globalData.openid)
