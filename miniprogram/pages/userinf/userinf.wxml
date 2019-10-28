@@ -1,0 +1,70 @@
+<!--个人中心-->
+<scroll-view scroll-y class="scrollPage">
+  <view class="UCenter-bg">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 请先点击这里 </button>
+    <block wx:else>
+      <image src="{{userInfo.avatarUrl}}" class="userinfo-avatar" mode="cover"></image>
+      <view class="text-xl">{{userInfo.nickName}}
+        <!--<text class="text-df">v2.0</text>-->
+      </view>
+
+      <view class="margin-top-sm">
+        <!--<text>哈哈</text>-->
+      </view>
+    </block>
+    <image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+  </view>
+  <view class="padding flex text-center text-grey bg-white shadow-warp">
+    <view bindtap='star'class="flex flex-sub flex-direction solid-right">
+      <view class="text-xxl text-orange">{{stuinf.starnum}}</view>
+      <view class="margin-top-sm">
+        <text class="cuIcon-like"></text> 收藏</view>
+    </view>
+    <view bindtap='rec' class="flex flex-sub flex-direction solid-right">
+      <view wx:if="{{stuId!=''}}" class="text-xxl text-blue">已认证</view>
+      <view wx:else class="text-xxl text-blue">未认证</view>
+      <view class="margin-top-sm">
+        <text class="cuIcon-favor"></text>校友认证</view>
+    </view>
+
+  </view>
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+    <view bindtap="userfile" class="cu-item arrow">
+      <view class="content" hover-class="none">
+        <text class="cuIcon-profile text-green"></text>
+        <text class="text-grey">我的资料</text>
+      </view>
+    </view>
+
+    <view class="cu-item arrow">
+      <navigator class="content" url="../taskdone/taskdone" hover-class="none">
+        <text class="cuIcon-time text-orange"></text>
+        <text class="text-grey">组队历史</text>
+      </navigator>
+    </view>
+  </view>
+    <view class="cu-list menu card-menu sm-border margin-top-xl margin-bottom-xl shadow-lg">
+    <view class="cu-item arrow">
+      <navigator class='content' url='../about/about' hover-class='none'>
+        <text class='cuIcon-new  text-mauve'></text>
+        <text class='text-grey'>关于我们</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <button class='cu-btn content' open-type='feedback'>
+        <text class="cuIcon-notice  text-red"></text>
+        <text class='text-grey'>反馈</text>
+      </button>
+    </view>
+  </view>
+  <!--<view class="cu-tabbar-height"></view>-->
+  <button wx:if="{{stuId!=''}}" bindtap="quit" class="bg-red round">退出登录</button>
+  <button wx:else bindtap="login" type="primary">认证</button>
+</scroll-view>
+
+<view class="weui-footer">
+  <view class="weui-footer__links">
+    <navigator url="" class="weui-footer__link">同济大学</navigator>
+  </view>
+  <view class="weui-footer__text">Copyright © 2019-2019 lyp</view>
+</view>
