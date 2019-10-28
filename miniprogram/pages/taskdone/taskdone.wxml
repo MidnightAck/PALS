@@ -1,0 +1,24 @@
+<!--我的-->
+<!--<view>
+<text>\n</text>
+</view>-->
+<view wx:if="{{stuId!=''&&currentTab!=(item.Giverid===stuId)}}" wx:for="{{taskOngoing}}" wx:for-index="index" data-index="{{index}}" wx:key="number" class='pal_card'>
+  <view class='giver'>
+    <image src="{{item.avotor}}"></image>
+  </view>
+  <view class='basinf'>
+    <view class='taskbrief'>
+      <text>{{item.briefInf}}</text>
+    </view>
+    <view class='tasktag'>
+      <text>{{category[item.category]}}</text>
+    </view>
+    <view class='taskmate'>
+      <text>所需人数:{{item.teammate}}人</text>
+      <text class="cuIcon-profile text-black">参与候选人：{{item.Reciverid.length}}人</text>
+    </view>
+  </view>
+  <view class='taskdue'>
+    <text>候选截止日期：{{item.dateInf}}</text>
+  </view>
+</view>

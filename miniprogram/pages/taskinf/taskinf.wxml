@@ -1,0 +1,104 @@
+<!--index.wxml-->
+<view>
+  <scroll-view scroll-y class="DrawerPage {{modalName=='viewModal'?'show':''}}" style="height: 93.5%">
+
+    <import src="/wxSearch/wxSearch.wxml" />
+
+    <view class="page">
+
+      <view class="cu-timeline">
+        <view class="cu-time">任务详情</view>
+        <view class="cu-item cur cuIcon-noticefill">
+          <view class="content bg-olive shadow-blur">
+            <text>队伍简述：</text> {{taskOngoing.briefInf}}
+          </view>
+          <view class="content bg-olive shadow-blur">
+            <text>候选人名单：</text>{{taskOngoing.Reciverid}}
+          </view>
+          <view class="bg-olive content shadow-blur">
+            <text>开始时间：</text> {{taskOngoing.dateInf}}
+          </view>
+          <view class="bg-olive content shadow-blur">
+            <text>队伍详情：</text>{{taskOngoing.detailsInf}}
+          </view>
+        </view>
+      </view>
+
+      <view bindtap="showModal" data-target="viewModal" wx:for="{{userlist}}" wx:for-index="index" data-index="{{index}}" wx:key="number" class='pal_card'>
+        <view class='giver'>
+          <image src="{{item.userInfo.avatarUrl}}"></image>
+        </view>
+        <view class='basinf'>
+          <view class='taskbrief'>
+            <text>{{item.name}}</text>
+          </view>
+          <view class='taskmate'>
+            <text>学院:{{item.school}}</text>
+            <text class="cuIcon-profile text-black">专业：{{item.major}}</text>
+          </view>
+        </view>
+        
+      </view>
+  <view class="padding flex flex-direction">
+    <button ontap="complete" wx:if="{{taskOngoing.Giverid==stuID}}" class="cu-btn bg-green margin-tb-sm lg">组队完成</button>
+    <button ontap="update" wx:if="{{taskOngoing.Giverid==stuID}}" class="cu-btn bg-red margin-tb-sm lg">更改队伍信息</button>
+  
+    
+    <button ontap="quit" wx:else class="cu-btn bg-red margin-tb-sm lg">退出队伍</button>
+    <form report-submit="true" bindsubmit="button_three">
+      <button formType="submit" ontap="dismiss" wx:if="{{taskOngoing.Giverid==stuID}}" class="cu-btn bg-grey margin-tb-sm lg">解散队伍</button>
+      
+    </form>
+  </view>
+
+    </view>
+
+  </scroll-view>
+  <tabbar tabbar="{{tabbar}}"></tabbar>
+</view>
+
+<view class="DrawerClose {{modalName=='viewModal'?'show':''}}" bindtap="hideModal">
+  <text class="cuIcon-pullright"></text>
+</view>
+
+
+<scroll-view scroll-y class="DrawerWindow {{modalName=='viewModal'?'show':''}}">
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+
+    <view class="cu-timeline">
+      <view class="cu-time">候选人</view>
+      <view class="cu-item cur cuIcon-noticefill">
+        <view class="bg-orange content shadow-blur">
+          <text>姓名：</text>
+          <text>{{userlist[modalIndex].name}}</text>
+        </view>
+        <view class="bg-yellow content shadow-blur">
+          <text>学院：</text>
+          <text>{{userlist[modalIndex].school}}</text>
+        </view>
+        <view class="bg-blue content shadow-blur">
+          <text>专业：</text>
+          <text>{{userlist[modalIndex].major}}</text>
+        </view>
+         <view class="bg-cyan content shadow-blur">
+          <text>简介：</text>
+          <text>{{taskOngoing.reciInf[modalIndex]}}</text>
+        </view>
+        <view class="bg-olive content shadow-blur">
+          <text>标签：</text>
+          <view class="padding-sm flex flex-wrap">
+            <view class="padding-xs" data-index='{{index}}' wx:for="{{userlist[modalIndex].tag}}" wx:key>
+              <view class="cu-tag radius line-white">{{item}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <form report-submit="true" bindsubmit="button_three">
+      <button class="raise" position="fixed" formType="submit" ontap="button_choose" disabled="{{disabled}}">组队</button>
+    </form>
+
+  </view>
+</scroll-view>
