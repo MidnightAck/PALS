@@ -21,7 +21,7 @@ PALS组队助手是一款针对于同济大学在读学生的线上组队小程�
 ## Quick start
 
 微信小程序的二维码如下：
-![PALS](https://imgse.com/i/QW5mC9)
+![PALS](https://s2.ax1x.com/2019/12/15/QW5mC9.jpg)
 
 
 ## what is PALS
@@ -42,23 +42,23 @@ PALS组队助手是一款针对于同济大学在读学生的线上组队小程�
 ## what PALS looks like
 **主界面**
 
-![img](https://s2.ax1x.com/2019/12/15/QWIpIe.png)
+![img](https://s2.ax1x.com/2019/12/15/QWIpIe.png){:height="50%" width="50%"}
 
 **发起组队**
 
-![img](https://s2.ax1x.com/2019/12/15/QWIPGd.png)
+![img](https://s2.ax1x.com/2019/12/15/QWIPGd.png){:height="50%" width="50%"}
 
 **队伍简介**
 
-![img](https://s2.ax1x.com/2019/12/15/QWIiRA.png)
+![img](https://s2.ax1x.com/2019/12/15/QWIiRA.png){:height="50%" width="50%"}
 
 **我的队伍**
 
-![img](https://s2.ax1x.com/2019/12/15/QWISaD.png)
+![img](https://s2.ax1x.com/2019/12/15/QWISaD.png){:height="50%" width="50%"}
 
 **任务详情**
 
-![img](https://s2.ax1x.com/2019/12/15/QW5zVO.png)
+![img](https://s2.ax1x.com/2019/12/15/QW5zVO.png){:height="50%" width="50%"}
 
 
 ## Bugs & Questions
