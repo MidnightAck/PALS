@@ -1,63 +1,42 @@
-## 需求list
+# PALS组队助手
 
-### 所有之前
-- [x] 基本的前端
-- [x] 设计数据库联系
+![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen) ![build](https://img.shields.io/badge/build-passing-brightgreen) ![colorUI](https://img.shields.io/badge/colorUI-v2.0.2-blue)
 
-### 进入程序
-- [x] 获取用户信息
+PALS组队助手是一款针对于同济大学在读学生的线上组队小程序。经过认证的同济大学用户可在小程序中发布组队、加入队伍、并根据用户标签筛选完成组队。
 
-### 广场
-- [x] 调用推荐算法
-- [x] 根据推荐算法对数据库中的信息++排序++
-- [x] 根据排序调取信息，展示在页面
-- [x] 点击页面跳转/当前页面显示详情
-- [x] 详情页显示信息
-- [ ] 进行评论
-- [x] 进入候选人队列
-- [x] 不可重复加入
-- [x] 提醒发布人
-- [x] 搜索
+前端完成使用[colorUI组件库](https://github.com/weilanwl/ColorUI)
 
-> 如何安排数据库
+<a href="https://github.com/weilanwl/ColorUI">**&raquo; ColorUI**</a>
 
-### 发布
-- [x] 显示表单
-- [x] 用户填写表单（多种方式：下拉菜单、直接填写、选项）
-- [x] 提交表单到数据库
-- [x] 返回成功或失败页面
-- [x] ++提交信息到我的++
 
-> 考虑填写时的边界
-> 提交到哪个数据库
-> 是否需要session？
+#### Table of Contents
 
-### 消息
-- [x] 查询用户数据库（是否需要消息数据库）
-- [x] 将数据分类显示
-- [x] ++收到 **广场** 页面的信息++
-- [x] 发送消息至用户端/关联公众号
-- [x] 小程序内消息提示与消除
+- [Quick start](#quick-start)
+- [Features](#features)
+- [Bugs & Questions](#bugs--questions)
 
-> 如何优化分配数据库的方式
 
-### 我的
-- [x] 显示不同条目
-- [x] 点击条目跳转页面显示表单
-- [x] 对学生证进行识别
-- [x] 用户填写表单并提交到数据库
-- [x] ++根据其他页面的数据进行更新++
-- [x] 评分机制算法
+## Quick start
 
-> 识别错误进行申诉
-> 阿里ocr
+微信小程序的二维码如下：
+![PALS](https://imgse.com/i/QW5mC9)
 
-### 数据库
 
-userAll 学号 姓名 学院 专业 完成的任务 申请中的任务 发布的任务 
 
-taskAll 任务号 发布人id 
- 
-taskSingle 发布人id  候选人
+
+## Features
+
+- 在同济大学的同学可直接扫描校园卡进行OCR注册认证
+- 对于进行组队的消息可分组可见
+- 模板消息直接通知到用户，不需要多次进入小程序
+
+
+
+
+## Bugs & Questions
+
+- Got a question? Please first search other people's comments <a href="https://gist.github.com/hwdsl2/9030462#comments" target="_blank">in this Gist</a> and <a href="https://blog.ls20.com/ipsec-l2tp-vpn-auto-setup-for-ubuntu-12-04-on-amazon-ec2/#disqus_thread" target="_blank">on my blog</a>.
+- If you found a reproducible bug, open a <a href="https://github.com/hwdsl2/setup-ipsec-vpn/issues?q=is%3Aissue" target="_blank">GitHub Issue</a> to submit a bug report.
+
 
 
