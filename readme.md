@@ -41,24 +41,19 @@ PALS组队助手是一款针对于同济大学在读学生的线上组队小程�
 
 ## what PALS looks like
 **主界面**
-
-![img](https://s2.ax1x.com/2019/12/15/QWIpIe.png){:height="50%" width="50%"}
+![img](https://s2.ax1x.com/2019/12/15/QWIpIe.png)
 
 **发起组队**
-
-![img](https://s2.ax1x.com/2019/12/15/QWIPGd.png){:height="50%" width="50%"}
+![img](https://s2.ax1x.com/2019/12/15/QWIPGd.png)
 
 **队伍简介**
-
-![img](https://s2.ax1x.com/2019/12/15/QWIiRA.png){:height="50%" width="50%"}
+![img](https://s2.ax1x.com/2019/12/15/QWIiRA.png)
 
 **我的队伍**
-
-![img](https://s2.ax1x.com/2019/12/15/QWISaD.png){:height="50%" width="50%"}
+![img](https://s2.ax1x.com/2019/12/15/QWISaD.png)
 
 **任务详情**
-
-![img](https://s2.ax1x.com/2019/12/15/QW5zVO.png){:height="50%" width="50%"}
+![img](https://s2.ax1x.com/2019/12/15/QW5zVO.png)
 
 
 ## Bugs & Questions
