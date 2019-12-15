@@ -12,7 +12,9 @@ PALS组队助手是一款针对于同济大学在读学生的线上组队小程�
 #### Table of Contents
 
 - [Quick start](#quick-start)
-- [Features](#features)
+- [what is PALS](#what-is-PALS)
+- [what PALS can do](#what-PALS-can-do)
+- [what PALS looks like](#what-PALS-looks-like)
 - [Bugs & Questions](#bugs--questions)
 
 
@@ -22,20 +24,45 @@ PALS组队助手是一款针对于同济大学在读学生的线上组队小程�
 ![PALS](https://imgse.com/i/QW5mC9)
 
 
+## what is PALS
+
+- 需要发起组队参与`比赛、项目`。需要不认识的具有其他技能的人参与。
+- 需要`即时的组队`，一次性且快速的事件。如约定时间同一地点拼车前往同一地。
+- 需要结交新的有着`相同爱好`的朋友，可发起同一爱好的事件寻求组队。
 
 
-## Features
+## what PALS can do 
 
-- 在同济大学的同学可直接扫描校园卡进行OCR注册认证
-- 对于进行组队的消息可分组可见
-- 模板消息直接通知到用户，不需要多次进入小程序
+- 实现用户身份验证：通过OCR识别用户校园卡完成身份验证；
+- 建立个人信息库：个人可维护自身信息，完成组队能力标签作为组队凭证；
+- 完成队伍发布与分类：用户可发起队伍并进行相关分类；
+- 实现加入队伍：用户可加入其他用户的队伍；
+- 实现加入与发布的通知：调用模板消息。当用户加入队伍时，对发起者进行通知；当发起者选择用户后，对用户发起通知。
 
+## what PALS looks like
+**主界面**
 
+![img](https://s2.ax1x.com/2019/12/15/QWIpIe.png)
+
+**发起组队**
+
+![img](https://s2.ax1x.com/2019/12/15/QWIPGd.png)
+
+**队伍简介**
+
+![img](https://s2.ax1x.com/2019/12/15/QWIiRA.png)
+
+**我的队伍**
+
+![img](https://s2.ax1x.com/2019/12/15/QWISaD.png)
+
+**任务详情**
+
+![img](https://s2.ax1x.com/2019/12/15/QW5zVO.png)
 
 
 ## Bugs & Questions
 
-- Got a question? Please first search other people's comments <a href="https://gist.github.com/hwdsl2/9030462#comments" target="_blank">in this Gist</a> and <a href="https://blog.ls20.com/ipsec-l2tp-vpn-auto-setup-for-ubuntu-12-04-on-amazon-ec2/#disqus_thread" target="_blank">on my blog</a>.
 - If you found a reproducible bug, open a <a href="https://github.com/hwdsl2/setup-ipsec-vpn/issues?q=is%3Aissue" target="_blank">GitHub Issue</a> to submit a bug report.
 
 
